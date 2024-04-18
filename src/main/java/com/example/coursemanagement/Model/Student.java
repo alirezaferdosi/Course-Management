@@ -29,7 +29,7 @@ public class Student {
 
     @ManyToOne(targetEntity = College.class)
     @Column(name = "College_name", nullable = false)
-    private Long clgid;
+    private College clgid;
 
 
     public Long getSid() {
@@ -68,11 +68,11 @@ public class Student {
         this.address = address;
     }
 
-    public Long getClgid() {
+    public College getClgid() {
         return clgid;
     }
 
-    public void setClgid(Long clgid) {
+    public void setClgid(College clgid) {
         this.clgid = clgid;
     }
 }

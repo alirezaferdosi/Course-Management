@@ -25,7 +25,7 @@ public class Course {
 
     @ManyToOne(targetEntity = College.class)
     @Column(name = "College_name", nullable = false)
-    private Long clgid;
+    private College clgid;
 
 
     public Long getCid() {
@@ -48,11 +48,11 @@ public class Course {
         this.unit = unit;
     }
 
-    public Long getClgid() {
+    public College getClgid() {
         return clgid;
     }
 
-    public void setClgid(Long clgid) {
+    public void setClgid(College clgid) {
         this.clgid = clgid;
     }
 }

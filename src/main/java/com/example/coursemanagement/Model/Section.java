@@ -13,22 +13,22 @@ public class Section {
     @ManyToOne(targetEntity = Professor.class)
     @MapsId("Professor_id")
     @JoinColumn(name = "Professor_id")
-    private Long pid;
+    private Professor pid;
 
     @ManyToOne(targetEntity = Course.class)
     @MapsId("Course_id")
     @JoinColumn(name = "Course_id")
-    private Long course;
+    private Course course;
 
     @ManyToOne(targetEntity = College.class)
     @MapsId("College_name")
     @JoinColumn(name = "College_name")
-    private Long college;
+    private College college;
 
     @ManyToOne(targetEntity = Student.class)
     @MapsId("Student_id")
     @JoinColumn(name = "Student_id")
-    private Long student;
+    private Student student;
 
 
 

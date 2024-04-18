@@ -11,47 +11,43 @@ import java.io.Serializable;
 public class SectionKey implements Serializable {
 
     @Column(name = "Professor_id")
-    private Long pid;
+    private Professor pid;
 
     @Column(name = "Course_id")
-    private Long cid;
+    private Course cid;
 
     @Column(name = "College_name")
-    private Long clgid;
+    private College clgid;
 
     @Column(name = "Student_id")
-    private Long sid;
+    private Student sid;
 
 
-    public Long getPid() {
+    public Professor getPid() {
         return pid;
     }
 
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
-
-    public Long getCid() {
+    public Course getCid() {
         return cid;
     }
 
-    public void setCid(Long cid) {
+    public void setCid(Course cid) {
         this.cid = cid;
     }
 
-    public Long getClgid() {
+    public College getClgid() {
         return clgid;
     }
 
-    public void setClgid(Long clgid) {
+    public void setClgid(College clgid) {
         this.clgid = clgid;
     }
 
-    public Long getSid() {
+    public Student getSid() {
         return sid;
     }
 
-    public void setSid(Long sid) {
+    public void setSid(Student sid) {
         this.sid = sid;
     }
 }
