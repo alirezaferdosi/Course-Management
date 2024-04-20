@@ -16,7 +16,6 @@ public class Student {
     private String sname;
 
     @Max(48)
-
     @Column(name = "Student_family", nullable = false)
     private String sfamily;
 
@@ -28,7 +27,7 @@ public class Student {
     private String address;
 
     @ManyToOne(targetEntity = College.class)
-    @Column(name = "College_name", nullable = false)
+    @JoinColumn(name = "College_name", nullable = false)
     private College clgid;
 
 

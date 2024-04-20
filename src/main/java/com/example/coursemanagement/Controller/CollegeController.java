@@ -16,17 +16,27 @@ import javax.validation.Valid;
  *  This class manages all requests related to the university.
  */
 @Component
-@RestController("/College")
+@RestController
+@RequestMapping("/College")
 public class CollegeController {
 
-    @Autowired private CollegeService collegeService;
+    @Autowired
+    private CollegeService collegeService;
 
     @PostMapping
     public College AddCollege(@Valid @RequestBody College college){
+        System.out.println("Lsofhsodhbalhksobhqlef");
+        System.out.println(college);
         return collegeService.AddCollege(college);
     }
+//    @PostMapping
+//    public College AddCollege(@Valid @RequestBody College college){
+//        System.out.println("Lsofhsodhbalhksobhqlef");
+//        System.out.println(college);
+//        return collegeService.AddCollege(new College());
+//    }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<College> GetAllCollege(){
         return collegeService.GetAllCollege();
     }

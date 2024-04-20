@@ -14,16 +14,16 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.function.Consumer;
-
+@Component
 @Configuration
 @EnableJpaRepositories
 @EnableAutoConfiguration
 @EnableTransactionManagement
-@ComponentScan(value = "com.example.coursemanagement")
+@ComponentScan(basePackages = {"com.example.coursemanagement"})
 public class ApplicationConfig {
     @Bean
     public EmbeddedDatabase dataSource(){

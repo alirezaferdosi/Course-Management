@@ -1,14 +1,16 @@
 package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "College")
-@NamedQuery(name = "add college" , query = "INSERT INTO College(clgname,HDepartment) VALUES(?,?)")
-public class College <T>{
+@Component
+//@NamedQuery(name = "add college" , query = "INSERT INTO College(clgname,HDepartment)  String VALUES(:clgname,:HDepartment)")
+public class College{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,10 +19,11 @@ public class College <T>{
 
     @Max(48)
     @Min(5)
-    @Column(name = "college_name", nullable = false, unique = true, length = 48)
+    @Column(name = "college_name", nullable = false, unique = true)
     private String clgname;
 
-    @Column(name = "Head_Department", nullable = false)
+    @OneToOne(targetEntity = Professor.class)
+    @JoinColumn(name = "Head_Department")
     private Professor HDepartment;
 
 

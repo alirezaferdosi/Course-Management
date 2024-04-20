@@ -2,6 +2,7 @@ package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
 import javax.validation.constraints.Max;
+
 @Entity
 @Table(name = "Professor")
 public class Professor {
@@ -22,7 +23,7 @@ public class Professor {
     private String ncode;
 
     @ManyToOne(targetEntity = College.class)
-    @Column(name = "College_name", nullable = false)
+    @JoinColumn(name = "College_name", nullable = false)
     private College clgid;
 
 
@@ -54,11 +55,11 @@ public class Professor {
         this.ncode = ncode;
     }
 
-    public College getClgid() {
-        return clgid;
-    }
-
-    public void setClgid(College clgid) {
-        this.clgid = clgid;
-    }
+//    public College getClgid() {
+//        return clgid;
+//    }
+//
+//    public void setClgid(College clgid) {
+//        this.clgid = clgid;
+//    }
 }

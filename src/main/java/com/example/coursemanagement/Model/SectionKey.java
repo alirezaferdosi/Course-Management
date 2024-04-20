@@ -1,53 +1,56 @@
 package com.example.coursemanagement.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
 
-@Data
-@Embeddable
+//@Entity
 public class SectionKey implements Serializable {
 
-    @Column(name = "Professor_id")
-    private Professor pid;
+//    @Column(name = "Professor_id")
+    private Professor professor;
 
-    @Column(name = "Course_id")
-    private Course cid;
+//    @Column(name = "Course_id")
+        private Course course;
 
-    @Column(name = "College_name")
-    private College clgid;
+//    @Column(name = "College_name")
+    private College college;
 
-    @Column(name = "Student_id")
-    private Student sid;
+//    @Column(name = "Student_id")
+    private Student student;
 
 
-    public Professor getPid() {
-        return pid;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public Course getCid() {
-        return cid;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
-    public void setCid(Course cid) {
-        this.cid = cid;
+    public Course getCourse() {
+        return course;
     }
 
-    public College getClgid() {
-        return clgid;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public void setClgid(College clgid) {
-        this.clgid = clgid;
+    public College getCollege() {
+        return college;
     }
 
-    public Student getSid() {
-        return sid;
+    public void setCollege(College college) {
+        this.college = college;
     }
 
-    public void setSid(Student sid) {
-        this.sid = sid;
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

@@ -11,7 +11,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "College_name")
+    @Column(name = "Course_id")
     private Long cid;
 
     @Max(64)
@@ -24,7 +24,7 @@ public class Course {
     private Integer unit;
 
     @ManyToOne(targetEntity = College.class)
-    @Column(name = "College_name", nullable = false)
+    @JoinColumn(name = "College_name", nullable = false)
     private College clgid;
 
 
@@ -56,3 +56,4 @@ public class Course {
         this.clgid = clgid;
     }
 }
+
