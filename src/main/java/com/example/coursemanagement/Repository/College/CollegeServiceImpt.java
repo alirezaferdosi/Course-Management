@@ -2,6 +2,7 @@ package com.example.coursemanagement.Repository.College;
 
 import com.example.coursemanagement.Model.College;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -10,16 +11,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
-@Component
 @Service
+@Component
 public class CollegeServiceImpt implements CollegeService{
 
     @Autowired
     CollegeRepository collegeRepository;
 
     @Override
+    @Transactional
     public College AddCollege(College college) {
         return collegeRepository.save(college);
+//        collegeRepository.flush();
+//        return object;
     }
 
     @Override
