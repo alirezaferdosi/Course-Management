@@ -2,10 +2,12 @@ package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
 
+@Service
 @Entity
 @Table(name = "College")
 @Component

@@ -25,8 +25,6 @@ public class CollegeController {
 
     @PostMapping
     public College AddCollege(@Valid @RequestBody College college){
-        System.out.println("Lsofhsodhbalhksobhqlef");
-        System.out.println(college);
         return collegeService.AddCollege(college);
     }
 //    @PostMapping

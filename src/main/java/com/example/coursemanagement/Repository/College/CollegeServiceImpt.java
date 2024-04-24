@@ -21,7 +21,7 @@ public class CollegeServiceImpt implements CollegeService{
     @Override
     @Transactional
     public College AddCollege(College college) {
-        return collegeRepository.save(college);
+        return collegeRepository.saveAndFlush(college);
 //        collegeRepository.flush();
 //        return object;
     }
