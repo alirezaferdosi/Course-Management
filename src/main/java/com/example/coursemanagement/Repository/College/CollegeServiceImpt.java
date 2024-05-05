@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Component
+//@Component
 public class CollegeServiceImpt implements CollegeService{
 
     @Autowired

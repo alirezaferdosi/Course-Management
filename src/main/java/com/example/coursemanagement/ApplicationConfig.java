@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Component
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "com.example.coursemanagement.Repository")
 @EnableAutoConfiguration
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"com.example.coursemanagement"})
@@ -39,7 +39,7 @@ public class ApplicationConfig {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("com.example.coursemanagement");
+        factory.setPackagesToScan("com.example.coursemanagement.Model");
         factory.setDataSource(dataSource());
         factory.afterPropertiesSet();
 
