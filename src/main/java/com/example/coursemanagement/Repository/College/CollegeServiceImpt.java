@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
-//@Component
 public class CollegeServiceImpt implements CollegeService{
 
     @Autowired
@@ -22,8 +22,6 @@ public class CollegeServiceImpt implements CollegeService{
     @Transactional
     public College AddCollege(College college) {
         return collegeRepository.save(college);
-//        collegeRepository.flush();
-//        return object;
     }
 
     @Override
@@ -40,12 +38,12 @@ public class CollegeServiceImpt implements CollegeService{
     public College UpdateCollege(College college, Long id) {
         College clg = collegeRepository.findById(id).get();
 
-        if(Objects.nonNull(college.getClgname()) && !college.getClgname().equals("")){
+        if(college.getClgname() != null && !college.getClgname().equals("") ){
             clg.setClggename(college.getClgname());
         }
-
-        if(Objects.nonNull(college.getHDepartment()) && !college.getHDepartment().equals("")){
-            clg.setHDepartment(clg.getHDepartment());
+        System.out.println(college.getHDepartment());
+        if(college.getHDepartment() != null && !college.getHDepartment().equals("")){
+            clg.setHDepartment(college.getHDepartment());
         }
 
         return collegeRepository.save(clg);

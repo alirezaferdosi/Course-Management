@@ -1,8 +1,9 @@
 package com.example.coursemanagement.Repository.College;
+import com.example.coursemanagement.Model.College;
 
 import java.util.List;
-import com.example.coursemanagement.Model.College;
 import org.springframework.stereotype.Component;
+
 
 @Component("CollegeService")
 public interface CollegeService {

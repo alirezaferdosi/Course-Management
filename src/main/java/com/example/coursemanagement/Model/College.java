@@ -15,7 +15,7 @@ import javax.validation.constraints.Max;
 public class College{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "college_id", nullable = false)
     private Long clgid;
 

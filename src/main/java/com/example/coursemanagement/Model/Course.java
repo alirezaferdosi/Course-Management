@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "Course_id")
     private Long cid;
 

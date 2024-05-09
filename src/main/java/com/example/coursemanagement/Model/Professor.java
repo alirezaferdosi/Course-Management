@@ -55,11 +55,11 @@ public class Professor {
         this.ncode = ncode;
     }
 
-//    public College getClgid() {
-//        return clgid;
-//    }
-//
-//    public void setClgid(College clgid) {
-//        this.clgid = clgid;
-//    }
+    public College getClgid() {
+        return clgid;
+    }
+
+    public void setClgid(College clgid) {
+        this.clgid = clgid;
+    }
 }

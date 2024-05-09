@@ -7,7 +7,7 @@ import javax.validation.constraints.*;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Student_id")
     private Long sid;
 
