@@ -27,6 +27,24 @@ public class Professor {
     private College clgid;
 
 
+    public Professor(){}
+
+    public Professor(String pname, String pfamily, String ncode, College clgid) {
+        this.pname = pname;
+        this.pfamily = pfamily;
+        this.ncode = ncode;
+        this.clgid = clgid;
+    }
+
+    public Professor(Long pid, String pname, String pfamily, String ncode, College clgid) {
+        this.pid = pid;
+        this.pname = pname;
+        this.pfamily = pfamily;
+        this.ncode = ncode;
+        this.clgid = clgid;
+    }
+
+
     public Long getpid() {
         return pid;
     }

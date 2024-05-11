@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class CollegeServiceImpt implements CollegeService{
@@ -21,6 +19,9 @@ public class CollegeServiceImpt implements CollegeService{
     @Override
     @Transactional
     public College AddCollege(College college) {
+        if(college.getClgid() != null){
+            return null;
+        }
         return collegeRepository.save(college);
     }
 
@@ -41,7 +42,6 @@ public class CollegeServiceImpt implements CollegeService{
         if(college.getClgname() != null && !college.getClgname().equals("") ){
             clg.setClggename(college.getClgname());
         }
-        System.out.println(college.getHDepartment());
         if(college.getHDepartment() != null && !college.getHDepartment().equals("")){
             clg.setHDepartment(college.getHDepartment());
         }
@@ -53,4 +53,13 @@ public class CollegeServiceImpt implements CollegeService{
     public void DeleteCollege(Long id) {
         collegeRepository.deleteById(id);
     }
+
+    @Override
+    public Boolean ExistCollege(String name) {
+        for(College clg: collegeRepository.findAll()){
+            if(clg.getClgname().equals(name)) return true;
+        }
+        return false;
+    }
+
 }

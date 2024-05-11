@@ -16,4 +16,6 @@ public interface CollegeService {
     College UpdateCollege(College college, Long id);
 
     void DeleteCollege(Long id);
+
+    Boolean ExistCollege(String name);
 }

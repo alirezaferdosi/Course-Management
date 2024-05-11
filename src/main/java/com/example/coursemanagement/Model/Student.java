@@ -31,6 +31,26 @@ public class Student {
     private College clgid;
 
 
+    public Student(){}
+
+    public Student(String sname, String sfamily, String ncode, String address, College clgid) {
+        this.sname = sname;
+        this.sfamily = sfamily;
+        this.ncode = ncode;
+        this.address = address;
+        this.clgid = clgid;
+    }
+
+    public Student(Long sid, String sname, String sfamily, String ncode, String address, College clgid) {
+        this.sid = sid;
+        this.sname = sname;
+        this.sfamily = sfamily;
+        this.ncode = ncode;
+        this.address = address;
+        this.clgid = clgid;
+    }
+
+
     public Long getSid() {
         return sid;
     }

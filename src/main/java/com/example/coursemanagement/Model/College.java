@@ -28,6 +28,16 @@ public class College{
     @JoinColumn(name = "Head_Department")
     private Professor HDepartment;
 
+    public College(){}
+
+    public College(String clgname){
+        this.clgname = clgname;
+    }
+
+    public College(String clgname, Professor HDepartment){
+        this.clgname = clgname;
+        this.HDepartment = HDepartment;
+    }
 
     public Long getClgid() {
         return clgid;

@@ -1,6 +1,5 @@
 package com.example.coursemanagement.Repository.Professor;
 
-import com.example.coursemanagement.Model.College;
 import com.example.coursemanagement.Model.Professor;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +11,9 @@ public interface ProfessorService {
 
     List<Professor> GetAllProfessor();
 
-    List<Professor> GetAllProfessor(College college);
-
-    Professor UpdateProfessor(Professor professor, Long id);
+    Professor UpdateProfessor(Professor professor);
 
     void DeleteProfessor(Long id);
+
+    Boolean ExistProfessor(String ncode);
 }
