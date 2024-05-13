@@ -4,6 +4,7 @@ import com.example.coursemanagement.Model.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -32,13 +33,38 @@ public class StudentServiceImpt implements StudentService{
     }
 
     @Override
-    public Student UpdateSTudent(Student student) {
-        return null;
+    public Student UpdateStudent(Student student) {
+        Student stud = studentRepository.findById(student.getSid()).get();
+
+        if(Objects.nonNull(student.getSname()) && !student.getSname().equals("")){
+            stud.setSname(student.getSname());
+        }
+        if(Objects.nonNull(student.getSfamily()) && !student.getSfamily().equals("")){
+            stud.setSfamily(student.getSfamily());
+        }
+        if(Objects.nonNull(student.getAddress()) && !student.getAddress().equals("")){
+            stud.setAddress(student.getAddress());
+        }
+        if(Objects.nonNull(student.getNcode()) && !student.getNcode().equals("")){
+            stud.setNcode(student.getNcode());
+        }
+
+        return studentRepository.save(stud);
     }
 
     @Override
-    public void DeleteStudent(Long id) {
+    public void DeleteStudentById(Long id) {
+        studentRepository.deleteById(id);
+    }
 
+    @Override
+    public void DeleteStudentByNationalcode(String ncode){
+        for(Student stud: studentRepository.findAll()){
+            if(stud.getNcode().equals(ncode)){
+                studentRepository.deleteById(stud.getSid());
+                break;
+            }
+        }
     }
 
     @Override

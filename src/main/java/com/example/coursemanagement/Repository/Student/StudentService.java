@@ -15,9 +15,11 @@ public interface StudentService {
 
     Optional<Student> GetStudentById(Long id);
 
-    Student UpdateSTudent(Student student);
+    Student UpdateStudent(Student student);
 
-    void DeleteStudent(Long id);
+    void DeleteStudentById(Long id);
+
+    void DeleteStudentByNationalcode(String ncode);
 
     Boolean ExistStudent(String ncode);
 

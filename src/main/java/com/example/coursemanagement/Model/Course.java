@@ -16,7 +16,7 @@ public class Course {
 
     @Max(64)
     @Column(name = "Course_name", nullable = false, unique = true)
-    private String canme;
+    private String cname;
 
     @Min(1)
     @Max(5)
@@ -27,17 +27,32 @@ public class Course {
     @JoinColumn(name = "College_name", nullable = false)
     private College clgid;
 
+    public Course(){}
+
+    public Course(Long cid, String canme, Integer unit, College clgid) {
+        this.cid = cid;
+        this.cname = canme;
+        this.unit = unit;
+        this.clgid = clgid;
+    }
+
+    public Course(String canme, Integer unit, College clgid) {
+        this.cname = canme;
+        this.unit = unit;
+        this.clgid = clgid;
+    }
+
 
     public Long getCid() {
         return cid;
     }
 
-    public String getCanme() {
-        return canme;
+    public String getCname() {
+        return cname;
     }
 
-    public void setCanme(String canme) {
-        this.canme = canme;
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
     public Integer getUnit() {

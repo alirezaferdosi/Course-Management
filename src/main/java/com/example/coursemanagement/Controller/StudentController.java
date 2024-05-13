@@ -27,17 +27,42 @@ public class StudentController {
     public Object AddStudent(@RequestBody StudentInterface student){
         if(studentService.ExistStudent(student.getNcode())) return "Student is Exist";
         return studentService.AddStudent(new Student(
-                                                     student.getSname(),
-                                                     student.getSfamily(),
-                                                     student.getNcode(),
-                                                     student.getAddress(),
-                                                     collegeService.GetCollegeById(student.getClgid())
-                                                     ));
-
+                                                    student.getSname(),
+                                                    student.getSfamily(),
+                                                    student.getNcode(),
+                                                    student.getAddress(),
+                                                    collegeService.GetCollegeById(student.getClgid())
+                                                    ));
     }
 
     @GetMapping
     public Object GetAllStudent(){
         return studentService.GetAllStudent();
     }
+
+    @PutMapping()
+    public Object UpdateStudent(@RequestBody StudentInterface student){
+        if(student.getSid() == null) return "Student Id can not be null";
+        return studentService.UpdateStudent(new Student(
+                                                student.getSid(),
+                                                student.getSname(),
+                                                student.getSfamily(),
+                                                student.getNcode(),
+                                                student.getAddress(),
+                                                collegeService.GetCollegeById(student.getClgid())
+                                                ));
+    }
+
+    @DeleteMapping("/id")
+    public void DeleteStudentById(@RequestBody Long id){
+        studentService.DeleteStudentById(id);
+    }
+
+    @DeleteMapping("/ncode")
+    public void DeleteStudentByNationalcode(@RequestBody String ncode){
+        studentService.DeleteStudentByNationalcode(ncode);
+    }
+
+
+
 }
