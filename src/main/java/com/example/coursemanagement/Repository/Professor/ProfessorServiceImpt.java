@@ -31,6 +31,11 @@ public class ProfessorServiceImpt implements ProfessorService{
     }
 
     @Override
+    public Professor GetProfessorById(Long id){
+        return professorRepository.findById(id).get();
+    }
+
+    @Override
     public Professor UpdateProfessor(Professor professor) {
         Professor prof = professorRepository.findById(professor.getpid()).get();
 

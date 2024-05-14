@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CourseServiceImpt implements CourseService {
@@ -24,10 +25,18 @@ public class CourseServiceImpt implements CourseService {
     }
 
     @Override
-    public List<Course> GetAllBourseByCollegeId(Long id) {
+    public Course GetCourseById(Long id){
+        for(Course crs: courseRepository.findAll()){
+            if(crs.getClgid().getClgid() == id) return crs;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Course> GetAllCourseByCollegeId(Long id) {
         List<Course> list = new ArrayList();
         for(Course course: courseRepository.findAll()){
-            if(course.getClgid().getClgid() == id){
+            if(Objects.equals(course.getClgid().getClgid(), id)){
                 list.add(course);
             }
         }
@@ -36,11 +45,31 @@ public class CourseServiceImpt implements CourseService {
 
     @Override
     public Course UpdateCourse(Course course) {
-        return null;
+        Course crs = courseRepository.findById(course.getCid()).get();
+
+        if(course.getCname() != null && !course.getCname().equals("")){
+            crs.setCname(course.getCname());
+        }
+        if(course.getUnit() != null && !course.getUnit().equals("")){
+            crs.setUnit(course.getUnit());
+        }
+        if(course.getClgid() != null && !course.getClgid().equals("")){
+            crs.setClgid(course.getClgid());
+        }
+
+        return courseRepository.save(crs);
     }
 
     @Override
     public void DeleteCourse(Long id) {
+        courseRepository.deleteById(id);
+    }
 
+    @Override
+    public Boolean ExistCourse(Long id){
+        for(Course crs: courseRepository.findAll()){
+            if(crs.getClgid().getClgid() == id) return true;
+        }
+         return false;
     }
 }

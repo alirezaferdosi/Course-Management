@@ -55,8 +55,11 @@ public class CollegeController {
 
         College clg = new College(college.getClgname(),
                                   collegeService.GetCollegeById(college.getClgid()).getHDepartment());
-        return collegeService.UpdateCollege(clg,
-                                            college.getClgid());
+        return collegeService.UpdateCollege(new College(
+                                                        college.getClgname(),
+                                                        collegeService.GetCollegeById(
+                                                                                     college.getClgid()).getHDepartment()),
+                                                                                     college.getClgid());
     }
 
     @DeleteMapping

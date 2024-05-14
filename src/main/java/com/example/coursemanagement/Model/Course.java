@@ -27,19 +27,25 @@ public class Course {
     @JoinColumn(name = "College_name", nullable = false)
     private College clgid;
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_name", nullable = false)
+    private Professor profid;
+
     public Course(){}
 
-    public Course(Long cid, String canme, Integer unit, College clgid) {
+    public Course(Long cid, String canme, Integer unit, College clgid, Professor profid) {
         this.cid = cid;
         this.cname = canme;
         this.unit = unit;
         this.clgid = clgid;
+        this.profid = profid;
     }
 
-    public Course(String canme, Integer unit, College clgid) {
+    public Course(String canme, Integer unit, College clgid, Professor profid) {
         this.cname = canme;
         this.unit = unit;
         this.clgid = clgid;
+        this.profid = profid;
     }
 
 
@@ -69,6 +75,14 @@ public class Course {
 
     public void setClgid(College clgid) {
         this.clgid = clgid;
+    }
+
+    public Professor getProfid() {
+        return profid;
+    }
+
+    public void setProfid(Professor profid) {
+        this.profid = profid;
     }
 }
 

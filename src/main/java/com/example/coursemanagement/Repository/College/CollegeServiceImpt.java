@@ -39,7 +39,7 @@ public class CollegeServiceImpt implements CollegeService{
     public College UpdateCollege(College college, Long id) {
         College clg = collegeRepository.findById(id).get();
 
-        if(college.getClgname() != null && !college.getClgname().equals("") ){
+        if(college.getClgname() != null && !college.getClgname().equals("")){
             clg.setClggename(college.getClgname());
         }
         if(college.getHDepartment() != null && !college.getHDepartment().equals("")){

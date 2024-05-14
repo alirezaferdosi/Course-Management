@@ -28,8 +28,8 @@ public class StudentServiceImpt implements StudentService{
     }
 
     @Override
-    public Optional<Student> GetStudentById(Long id) {
-        return studentRepository.findById(id);
+    public Student GetStudentById(Long id) {
+        return studentRepository.findById(id).get();
     }
 
     @Override

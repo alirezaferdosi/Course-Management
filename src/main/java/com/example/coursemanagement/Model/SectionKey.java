@@ -1,33 +1,20 @@
 package com.example.coursemanagement.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+public class SectionKey {
+    private Long id;
 
-import java.io.Serializable;
+    private Course course;
 
-//@Entity
-public class SectionKey implements Serializable {
+    private Integer term;
 
-//    @Column(name = "Professor_id")
-    private Professor professor;
-
-//    @Column(name = "Course_id")
-        private Course course;
-
-//    @Column(name = "College_name")
-    private College college;
-
-//    @Column(name = "Student_id")
     private Student student;
 
-
-    public Professor getProfessor() {
-        return professor;
+    public Long getId() {
+        return id;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Course getCourse() {
@@ -38,12 +25,12 @@ public class SectionKey implements Serializable {
         this.course = course;
     }
 
-    public College getCollege() {
-        return college;
+    public Integer getTerm() {
+        return term;
     }
 
-    public void setCollege(College college) {
-        this.college = college;
+    public void setTerm(Integer term) {
+        this.term = term;
     }
 
     public Student getStudent() {

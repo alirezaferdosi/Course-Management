@@ -13,7 +13,7 @@ public interface StudentService {
 
     List<Student> GetAllStudent();
 
-    Optional<Student> GetStudentById(Long id);
+    Student GetStudentById(Long id);
 
     Student UpdateStudent(Student student);
 

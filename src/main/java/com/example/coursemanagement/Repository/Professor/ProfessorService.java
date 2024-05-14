@@ -11,6 +11,8 @@ public interface ProfessorService {
 
     List<Professor> GetAllProfessor();
 
+    Professor GetProfessorById(Long id);
+
     Professor UpdateProfessor(Professor professor);
 
     void DeleteProfessor(Long id);

@@ -10,6 +10,8 @@ public class CourseInterface {
 
     private Long clgid;
 
+    private Long Profid;
+
 
     public Long getCid() {
         return cid;
@@ -41,5 +43,13 @@ public class CourseInterface {
 
     public void setClgid(Long clgid) {
         this.clgid = clgid;
+    }
+
+    public Long getProfid() {
+        return Profid;
+    }
+
+    public void setProf(Long profid) {
+        Profid = profid;
     }
 }
