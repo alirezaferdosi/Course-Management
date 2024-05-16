@@ -39,6 +39,13 @@ public class College{
         this.HDepartment = HDepartment;
     }
 
+    public College(Long clgid, String clgname, Professor HDepartment){
+        this.clgid = clgid;
+        this.clgname = clgname;
+        this.HDepartment = HDepartment;
+    }
+
+
     public Long getClgid() {
         return clgid;
     }

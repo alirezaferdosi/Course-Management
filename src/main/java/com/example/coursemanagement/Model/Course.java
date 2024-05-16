@@ -25,11 +25,11 @@ public class Course {
 
     @ManyToOne(targetEntity = College.class)
     @JoinColumn(name = "College_name", nullable = false)
-    private College clgid;
+    private College clg;
 
     @ManyToOne
     @JoinColumn(name = "teacher_name", nullable = false)
-    private Professor profid;
+    private Professor prof;
 
     public Course(){}
 
@@ -37,15 +37,15 @@ public class Course {
         this.cid = cid;
         this.cname = canme;
         this.unit = unit;
-        this.clgid = clgid;
-        this.profid = profid;
+        this.clg = clgid;
+        this.prof = profid;
     }
 
     public Course(String canme, Integer unit, College clgid, Professor profid) {
         this.cname = canme;
         this.unit = unit;
-        this.clgid = clgid;
-        this.profid = profid;
+        this.clg = clgid;
+        this.prof = profid;
     }
 
 
@@ -69,20 +69,20 @@ public class Course {
         this.unit = unit;
     }
 
-    public College getClgid() {
-        return clgid;
+    public College getClg() {
+        return clg;
     }
 
-    public void setClgid(College clgid) {
-        this.clgid = clgid;
+    public void setClg(College clg) {
+        this.clg = clg;
     }
 
-    public Professor getProfid() {
-        return profid;
+    public Professor getProf() {
+        return prof;
     }
 
-    public void setProfid(Professor profid) {
-        this.profid = profid;
+    public void setProf(Professor prof) {
+        this.prof = prof;
     }
 }
 

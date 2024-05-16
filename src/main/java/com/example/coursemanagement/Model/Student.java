@@ -28,7 +28,7 @@ public class Student {
 
     @ManyToOne(targetEntity = College.class)
     @JoinColumn(name = "College_name", nullable = false)
-    private College clgid;
+    private College clg;
 
 
     public Student(){}
@@ -38,7 +38,7 @@ public class Student {
         this.sfamily = sfamily;
         this.ncode = ncode;
         this.address = address;
-        this.clgid = clgid;
+        this.clg = clgid;
     }
 
     public Student(Long sid, String sname, String sfamily, String ncode, String address, College clgid) {
@@ -47,7 +47,7 @@ public class Student {
         this.sfamily = sfamily;
         this.ncode = ncode;
         this.address = address;
-        this.clgid = clgid;
+        this.clg = clgid;
     }
 
 
@@ -87,11 +87,11 @@ public class Student {
         this.address = address;
     }
 
-    public College getClgid() {
-        return clgid;
+    public College getClg() {
+        return clg;
     }
 
-    public void setClgid(College clgid) {
-        this.clgid = clgid;
+    public void setClg(College clg) {
+        this.clg = clg;
     }
 }

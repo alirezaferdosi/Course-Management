@@ -1,26 +1,29 @@
 package com.example.coursemanagement.Repository.Student;
 
+import com.example.coursemanagement.Model.Interface.StudentInterface;
 import com.example.coursemanagement.Model.Student;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component("StudentService")
 public interface StudentService {
-    Student AddStudent(Student student);
+    StudentInterface AddStudent(Student student);
 
-    List<Student> GetAllStudent();
+    List<StudentInterface> GetAllStudent();
 
-    Student GetStudentById(Long id);
+    Student GetStudentObjectById(Long id);
 
-    Student UpdateStudent(Student student);
+    StudentInterface GetStudentById(Long id);
+
+    StudentInterface UpdateStudent(Student student);
 
     void DeleteStudentById(Long id);
 
     void DeleteStudentByNationalcode(String ncode);
 
     Boolean ExistStudent(String ncode);
+
+    StudentInterface OutputFrame(Student student);
 
 }

@@ -31,7 +31,7 @@ public class StudentController {
                                                     student.getSfamily(),
                                                     student.getNcode(),
                                                     student.getAddress(),
-                                                    collegeService.GetCollegeById(student.getClgid())
+                                                    collegeService.GetCollegeObjectById(student.getClgid())
                                                     ));
     }
 
@@ -49,7 +49,7 @@ public class StudentController {
                                                 student.getSfamily(),
                                                 student.getNcode(),
                                                 student.getAddress(),
-                                                collegeService.GetCollegeById(student.getClgid())
+                                                collegeService.GetCollegeObjectById(student.getClgid())
                                                 ));
     }
 

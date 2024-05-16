@@ -1,42 +1,40 @@
 package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.util.Optional;
 
 @Entity
 @Table(name = "Section")
-@IdClass(SectionKey.class)
 public class Section {
-//    @Id
-//    @ManyToOne(targetEntity = Professor.class)
-//    @JoinColumn(name = "Professor_id")
-//    private Professor professor;
 
+    @EmbeddedId
+    private SectionKey id;
+/*
     @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Id
-    @ManyToOne(targetEntity = Course.class)
+    @ManyToOne
     @JoinColumn(name = "Course_id")
+//    @MapsId("course")
     private Course course;
 
-//    @Id
-//    @ManyToOne(targetEntity = College.class)
-//    @JoinColumn(name = "College_name")
-//    private College college;
-
     @Id
-    @ManyToOne(targetEntity = Student.class)
+    @ManyToOne
     @JoinColumn(name = "Student_id")
+//    @MapsId("student")
     private Student student;
 
     @Id
     @Column(name = "term", nullable = false)
+//    @MapsId("term")
     private Integer term;
+ */
 
     @Max(20)
     @Min(0)
@@ -44,26 +42,30 @@ public class Section {
     private Short score;
 
 
-    public Section(Optional<Student> student, Course course, Integer term, Short score){}
-
     public Section(Long id, Course course, Student student, Integer term, Short score) {
-//        this.id = id;
-        this.course = course;
-        this.student = student;
-        this.term = term;
+        this.id = new SectionKey();
+        this.id.setId(id);
+        this.id.setCourse(course);
+        this.id.setStudent(student);
+        this.id.setTerm(term);
         this.score = score;
     }
 
     public Section(Course course, Student student, Integer term, Short score) {
-        this.course = course;
-        this.student = student;
-        this.term = term;
+        this.id = new SectionKey();
+        this.id.setCourse(course);
+        this.id.setStudent(student);
+        this.id.setTerm(term);
         this.score = score;
     }
 
-//    public Long getId(){
-//        return id;
-//    }
+    public Section() {
+        this.id = new SectionKey();
+    }
+
+    public Long getId(){
+        return id.getId();
+    }
 
     public Short getScore() {
         return score;
@@ -74,42 +76,26 @@ public class Section {
     }
 
     public Integer getTerm() {
-        return term;
+        return id.getTerm();
     }
 
     public void setTerm(Integer term) {
-        this.term = term;
+        this.id.setTerm(term);
     }
 
-//    public Professor getProfessor() {
-//        return professor;
-//    }
-//
-//    public void setProfessor(Professor professor) {
-//        this.professor = professor;
-//    }
-
     public Course getCourse() {
-        return course;
+        return this.id.getCourse();
     }
 
     public void setCourse(Course course) {
-        this.course = course;
+        this.id.setCourse(course);
     }
 
-//    public College getCollege() {
-//        return college;
-//    }
-//
-//    public void setCollege(College college) {
-//        this.college = college;
-//    }
-
     public Student getStudent() {
-        return student;
+        return this.id.getStudent();
     }
 
     public void setStudent(Student student) {
-        this.student = student;
+        this.id.setStudent(student);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.coursemanagement.Repository.Course;
 
 import com.example.coursemanagement.Model.Course;
+import com.example.coursemanagement.Model.Interface.CourseInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,36 +16,42 @@ public class CourseServiceImpt implements CourseService {
     private CourseRepository courseRepository;
 
     @Override
-    public Course AddCourse(Course course) {
-        return courseRepository.save(course);
+    public CourseInterface AddCourse(Course course) {
+        return OutputFrame(courseRepository.save(course));
     }
 
     @Override
-    public List<Course> GetAllCourse() {
-        return courseRepository.findAll();
-    }
-
-    @Override
-    public Course GetCourseById(Long id){
+    public List<CourseInterface> GetAllCourse() {
+        List<CourseInterface> list = new ArrayList<>();
         for(Course crs: courseRepository.findAll()){
-            if(crs.getClgid().getClgid() == id) return crs;
+            list.add(OutputFrame(crs));
         }
-        return null;
+        return list;
     }
 
     @Override
-    public List<Course> GetAllCourseByCollegeId(Long id) {
-        List<Course> list = new ArrayList();
+    public CourseInterface GetCourseById(Long id){
+        return OutputFrame(GetCourseObjectById(id));
+    }
+
+    @Override
+    public  Course GetCourseObjectById(Long id){
+        return courseRepository.findById(id).get();
+    }
+
+    @Override
+    public List<CourseInterface> GetAllCourseByCollegeId(Long id) {
+        List<CourseInterface> list = new ArrayList();
         for(Course course: courseRepository.findAll()){
-            if(Objects.equals(course.getClgid().getClgid(), id)){
-                list.add(course);
+            if(Objects.equals(course.getClg().getClgid(), id)){
+                list.add(OutputFrame(course));
             }
         }
         return list;
     }
 
     @Override
-    public Course UpdateCourse(Course course) {
+    public CourseInterface UpdateCourse(Course course) {
         Course crs = courseRepository.findById(course.getCid()).get();
 
         if(course.getCname() != null && !course.getCname().equals("")){
@@ -53,11 +60,11 @@ public class CourseServiceImpt implements CourseService {
         if(course.getUnit() != null && !course.getUnit().equals("")){
             crs.setUnit(course.getUnit());
         }
-        if(course.getClgid() != null && !course.getClgid().equals("")){
-            crs.setClgid(course.getClgid());
+        if(course.getClg() != null && !course.getClg().equals("")){
+            crs.setClg(course.getClg());
         }
 
-        return courseRepository.save(crs);
+        return OutputFrame(courseRepository.save(crs));
     }
 
     @Override
@@ -68,8 +75,19 @@ public class CourseServiceImpt implements CourseService {
     @Override
     public Boolean ExistCourse(Long id){
         for(Course crs: courseRepository.findAll()){
-            if(crs.getClgid().getClgid() == id) return true;
+            if(crs.getClg().getClgid() == id) return true;
         }
          return false;
+    }
+
+    @Override
+    public CourseInterface OutputFrame(Course course){
+        return new CourseInterface(
+                                    course.getCid(),
+                                    course.getCname(),
+                                    course.getUnit(),
+                                    course.getClg().getClgid(),
+                                    course.getProf().getpid()
+                                    );
     }
 }

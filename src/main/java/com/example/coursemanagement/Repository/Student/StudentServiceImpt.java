@@ -1,11 +1,12 @@
 package com.example.coursemanagement.Repository.Student;
 
+import com.example.coursemanagement.Model.Interface.StudentInterface;
 import com.example.coursemanagement.Model.Student;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class StudentServiceImpt implements StudentService{
@@ -18,22 +19,31 @@ public class StudentServiceImpt implements StudentService{
 
 
     @Override
-    public Student AddStudent(Student student) {
-        return studentRepository.save(student);
+    public StudentInterface AddStudent(Student student) {
+        return OutputFrame(studentRepository.save(student));
     }
 
     @Override
-    public List<Student> GetAllStudent() {
-        return studentRepository.findAll();
+    public List<StudentInterface> GetAllStudent() {
+        List<StudentInterface> list = new ArrayList<>();
+        for(Student stud: studentRepository.findAll()){
+            list.add(OutputFrame(stud));
+        }
+        return list;
     }
 
     @Override
-    public Student GetStudentById(Long id) {
+    public Student GetStudentObjectById(Long id) {
         return studentRepository.findById(id).get();
     }
 
     @Override
-    public Student UpdateStudent(Student student) {
+    public StudentInterface GetStudentById(Long id){
+        return OutputFrame(GetStudentObjectById(id));
+    }
+
+    @Override
+    public StudentInterface UpdateStudent(Student student) {
         Student stud = studentRepository.findById(student.getSid()).get();
 
         if(Objects.nonNull(student.getSname()) && !student.getSname().equals("")){
@@ -49,7 +59,7 @@ public class StudentServiceImpt implements StudentService{
             stud.setNcode(student.getNcode());
         }
 
-        return studentRepository.save(stud);
+        return OutputFrame(studentRepository.save(stud));
     }
 
     @Override
@@ -73,5 +83,17 @@ public class StudentServiceImpt implements StudentService{
             if(stud.getNcode().equals(ncode)) return true;
         }
         return false;
+    }
+
+    @Override
+    public StudentInterface OutputFrame(Student student){
+        return new StudentInterface(
+                                    student.getSid(),
+                                    student.getSname(),
+                                    student.getSfamily(),
+                                    student.getNcode(),
+                                    student.getAddress(),
+                                    student.getClg().getClgid()
+                                    );
     }
 }

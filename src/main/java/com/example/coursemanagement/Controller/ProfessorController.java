@@ -30,7 +30,7 @@ public class ProfessorController {
         Professor prof = new Professor(professor.getPname(),
                                        professor.getPfamily(),
                                        professor.getNcode(),
-                                       collegeService.GetCollegeById(professor.getClgid()));
+                                       collegeService.GetCollegeObjectById(professor.getClgid()));
 
         return professorService.AddProfessor(prof);
     }
@@ -47,7 +47,7 @@ public class ProfessorController {
                                                        professor.getPname(),
                                                        professor.getPfamily(),
                                                        professor.getNcode(),
-                                                       collegeService.GetCollegeById(professor.getClgid())
+                                                       collegeService.GetCollegeObjectById(professor.getClgid())
                                                        ));
     }
 

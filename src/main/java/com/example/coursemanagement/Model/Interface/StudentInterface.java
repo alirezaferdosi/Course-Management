@@ -15,6 +15,16 @@ public class StudentInterface {
 
     private Long clgid;
 
+    public StudentInterface(){}
+
+    public StudentInterface(Long sid, String sname, String sfamily, String ncode, String address, Long clgid) {
+        this.sid = sid;
+        this.sname = sname;
+        this.sfamily = sfamily;
+        this.ncode = ncode;
+        this.address = address;
+        this.clgid = clgid;
+    }
 
     public Long getSid() {
         return sid;

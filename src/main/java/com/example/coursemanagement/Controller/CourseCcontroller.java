@@ -32,39 +32,38 @@ public class CourseCcontroller {
 
 
     @PostMapping
-    public Course AddCourse(@RequestBody CourseInterface course){
+    public CourseInterface AddCourse(@RequestBody CourseInterface course){
         return courseService.AddCourse(new Course(
                                                  course.getCname(),
                                                  course.getUnit(),
-                                                 collegeService.GetCollegeById(course.getClgid()),
-                                                 professorService.GetProfessorById(course.getProfid())
+                                                 collegeService.GetCollegeObjectById(course.getClgid()),
+                                                 professorService.GetProfessorObjectById(course.getProfid())
                                                  ));
     }
 
     @GetMapping
-    public List<Course> GetAllCourse(){
+    public List<CourseInterface> GetAllCourse(){
         return  courseService.GetAllCourse();
     }
 
     @GetMapping("SC")
-    public List<Course> GetAllCourseByCollegeId(@RequestBody String id){
+    public List<CourseInterface> GetAllCourseByCollegeId(@RequestBody String id){
         return courseService.GetAllCourseByCollegeId(Long.valueOf(id));
     }
 
     @PutMapping
-    public Course UpdateCourse(@RequestBody CourseInterface course){
+    public CourseInterface UpdateCourse(@RequestBody CourseInterface course){
         return courseService.UpdateCourse(new Course(
                                                     course.getCid(),
                                                     course.getCname(),
                                                     course.getUnit(),
-                                                    collegeService.GetCollegeById(course.getClgid()),
-                                                    professorService.GetProfessorById(course.getProfid())
+                                                    collegeService.GetCollegeObjectById(course.getClgid()),
+                                                    professorService.GetProfessorObjectById(course.getProfid())
                                                     ));
     }
 
     @DeleteMapping
     public void DeleteCourse(@RequestBody String id){
-//        if(courseService.ExistCourse(id)) return "Course dos not Exist";
         courseService.DeleteCourse(Long.valueOf(id));
     }
 }

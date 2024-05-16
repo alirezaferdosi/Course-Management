@@ -2,42 +2,44 @@ package com.example.coursemanagement.Repository.College;
 
 import com.example.coursemanagement.Model.College;
 
-import jakarta.transaction.Transactional;
+import com.example.coursemanagement.Model.Interface.CollegeInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CollegeServiceImpt implements CollegeService{
-
     @Autowired
     CollegeRepository collegeRepository;
 
+
     @Override
-    @Transactional
-    public College AddCollege(College college) {
+    public CollegeInterface AddCollege(College college) {
         if(college.getClgid() != null){
             return null;
         }
-        return collegeRepository.save(college);
+        return OutputFrame(collegeRepository.save(college));
     }
 
     @Override
-    public List<College> GetAllCollege() {
-        return collegeRepository.findAll();
+    public List<CollegeInterface> GetAllCollege() {
+        List<CollegeInterface> list = new ArrayList<>();
+        for(College clg: collegeRepository.findAll()){
+            list.add(OutputFrame(clg));
+        }
+        return list;
     }
 
     @Override
-    public College GetCollegeById(Long id) {
-        return collegeRepository.findById(id).get();
+    public CollegeInterface GetCollegeById(Long id){
+        return OutputFrame(GetCollegeObjectById(id));
     }
 
     @Override
-    public College UpdateCollege(College college, Long id) {
-        College clg = collegeRepository.findById(id).get();
+    public CollegeInterface UpdateCollege(College college) {
+        College clg = collegeRepository.findById(college.getClgid()).get();
 
         if(college.getClgname() != null && !college.getClgname().equals("")){
             clg.setClggename(college.getClgname());
@@ -46,7 +48,7 @@ public class CollegeServiceImpt implements CollegeService{
             clg.setHDepartment(college.getHDepartment());
         }
 
-        return collegeRepository.save(clg);
+        return OutputFrame(collegeRepository.save(clg));
     }
 
     @Override
@@ -60,6 +62,20 @@ public class CollegeServiceImpt implements CollegeService{
             if(clg.getClgname().equals(name)) return true;
         }
         return false;
+    }
+
+    @Override
+    public College GetCollegeObjectById(Long id){
+        return collegeRepository.findById(id).get();
+    }
+
+    @Override
+    public CollegeInterface OutputFrame(College clg) {
+        return new CollegeInterface(
+                clg.getClgid(),
+                clg.getClgname(),
+                clg.getHDepartment().getpid()
+        );
     }
 
 }

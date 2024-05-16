@@ -7,6 +7,14 @@ public class CollegeInterface {
 
     private Long HDepartment;
 
+    public  CollegeInterface(){}
+
+    public CollegeInterface(Long clgid, String clgname, Long HDepartment) {
+        this.clgid = clgid;
+        this.clgname = clgname;
+        this.HDepartment = HDepartment;
+    }
+
     public Long getClgid() {
         return clgid;
     }

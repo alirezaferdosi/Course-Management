@@ -4,6 +4,7 @@ import com.example.coursemanagement.Model.Interface.CollegeInterface;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Model.College;
 
+import com.example.coursemanagement.Repository.Professor.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -26,13 +27,20 @@ public class CollegeController {
     @Qualifier("collegeServiceImpt")
     private CollegeService collegeService;
 
+    @Autowired
+    @Qualifier("professorServiceImpt")
+    private ProfessorService professorService;
+
+
     @PostMapping
     public Object AddCollege(@Valid @RequestBody CollegeInterface college){
         if(collegeService.ExistCollege(college.getClgname())) return "College is exist";
 
         if(college.getHDepartment() != null){
-            return collegeService.AddCollege(new College(college.getClgname(),
-                                             collegeService.GetCollegeById(college.getHDepartment()).getHDepartment()));
+            return collegeService.AddCollege(new College(
+                                                        college.getClgname(),
+                                                        professorService.GetProfessorObjectById(college.getHDepartment())
+                                                        ));
         }else{
             return collegeService.AddCollege(new College(college.getClgname()));
         }
@@ -40,26 +48,24 @@ public class CollegeController {
     }
 
     @GetMapping("/all")
-    public List<College> GetAllCollege(){
+    public List<CollegeInterface> GetAllCollege(){
         return collegeService.GetAllCollege();
     }
 
     @GetMapping("/{id}")
-    public College GetCollegeById(@PathVariable("id") Long id){
+    public CollegeInterface GetCollegeById(@PathVariable("id") Long id){
         return collegeService.GetCollegeById(id);
     }
 
     @PutMapping()
-    public  Object UpdateCollege(@Valid @RequestBody CollegeInterface college){
+    public Object UpdateCollege(@Valid @RequestBody CollegeInterface college){
         if(collegeService.ExistCollege(college.getClgname())) return "College is exist";
 
-        College clg = new College(college.getClgname(),
-                                  collegeService.GetCollegeById(college.getClgid()).getHDepartment());
         return collegeService.UpdateCollege(new College(
+                                                        college.getClgid(),
                                                         college.getClgname(),
-                                                        collegeService.GetCollegeById(
-                                                                                     college.getClgid()).getHDepartment()),
-                                                                                     college.getClgid());
+                                                        professorService.GetProfessorObjectById(college.getHDepartment())
+                                                        ));
     }
 
     @DeleteMapping

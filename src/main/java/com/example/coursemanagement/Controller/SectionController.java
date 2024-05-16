@@ -31,17 +31,55 @@ public class SectionController {
 
 
     @PostMapping
-    public Section AddSection(@RequestBody SectionInterface section){
+    public SectionInterface AddSection(@RequestBody SectionInterface section){
         return sectionService.AddSection(new Section(
-                                                    courseService.GetCourseById(section.getCourse()),
-                                                    studentService.GetStudentById(section.getStudent()),
+                                                    courseService.GetCourseObjectById(section.getCourse()),
+                                                    studentService.GetStudentObjectById(section.getStudent()),
                                                     section.getTerm(),
                                                     section.getScore()
                                                     ));
     }
 
     @GetMapping
-    public List<Section> GetAllSection(){
+    public List<SectionInterface> GetAllSection(){
         return  sectionService.GetAllSection();
     }
+
+    @GetMapping("ByCollegeId")
+    public List<SectionInterface> GetAllSectionByCollegeId(@RequestBody String id){
+        return sectionService.GetAllSectionByCollegeId(id);
+    }
+
+    @GetMapping("ByProfessorId")
+    public List<SectionInterface> GetAllSectionByProfessorId(@RequestBody String id){
+        return sectionService.GetAllSectionByProfessorId(id);
+    }
+
+    @GetMapping("ByStudentId")
+    public List<SectionInterface> GetAllSectionByStudentId(@RequestBody String id){
+        return sectionService.GetAllSectionByStudentId(id);
+    }
+
+    @GetMapping("ByTerm")
+    public List<SectionInterface> GetAllSectionByTerm(@RequestBody String term){
+        return sectionService.GetAllSectionByTerm(Integer.valueOf(term));
+    }
+
+    @PutMapping
+    public SectionInterface UpdateSection(@RequestBody SectionInterface section){
+        return sectionService.UpdateSection(new Section(
+                                                        section.getId(),
+                                                        courseService.GetCourseObjectById(section.getCourse()),
+                                                        studentService.GetStudentObjectById(section.getStudent()),
+                                                        section.getTerm(),
+                                                        section.getScore()
+                                                        ));
+    }
+
+    @DeleteMapping
+    public void DeleteSection(@RequestBody String id){
+        sectionService.DeleteSection(Long.valueOf(id));
+    }
+
+
 }

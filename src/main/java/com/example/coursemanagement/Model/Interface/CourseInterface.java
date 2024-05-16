@@ -10,8 +10,17 @@ public class CourseInterface {
 
     private Long clgid;
 
-    private Long Profid;
+    private Long profid;
 
+    public CourseInterface(){}
+
+    public CourseInterface(Long cid, String cname, Integer unit, Long clgid, Long Profid) {
+        this.cid = cid;
+        this.cname = cname;
+        this.unit = unit;
+        this.clgid = clgid;
+        this.profid = Profid;
+    }
 
     public Long getCid() {
         return cid;
@@ -46,10 +55,10 @@ public class CourseInterface {
     }
 
     public Long getProfid() {
-        return Profid;
+        return profid;
     }
 
     public void setProf(Long profid) {
-        Profid = profid;
+        this.profid = profid;
     }
 }

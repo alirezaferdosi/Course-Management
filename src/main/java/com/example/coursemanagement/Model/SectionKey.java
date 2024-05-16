@@ -1,43 +1,30 @@
 package com.example.coursemanagement.Model;
 
-public class SectionKey {
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.io.Serializable;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+@Embeddable
+public class SectionKey implements Serializable {
+
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "Course_id")
     private Course course;
 
-    private Integer term;
-
+    @ManyToOne
+    @JoinColumn(name = "Student_id")
     private Student student;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public Integer getTerm() {
-        return term;
-    }
-
-    public void setTerm(Integer term) {
-        this.term = term;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+    @Column(name = "term", nullable = false)
+    private Integer term;
 }

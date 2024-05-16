@@ -1,42 +1,51 @@
 package com.example.coursemanagement.Repository.Professor;
 
-import com.example.coursemanagement.Model.College;
+import com.example.coursemanagement.Model.Interface.ProfessorInterface;
 import com.example.coursemanagement.Model.Professor;
 import com.example.coursemanagement.Repository.College.CollegeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 public class ProfessorServiceImpt implements ProfessorService{
 
-    private final ProfessorRepository professorRepository;
+    @Autowired
+    private ProfessorRepository professorRepository;
+    @Autowired
+    private CollegeRepository collegeRepository;
 
-    private final CollegeRepository collegeRepository;
 
-    public ProfessorServiceImpt(ProfessorRepository professorRepository, CollegeRepository collegeRepository) {
-        this.professorRepository = professorRepository;
-        this.collegeRepository = collegeRepository;
+    @Override
+    public ProfessorInterface AddProfessor(Professor professor) {
+        return OutputFrame(professorRepository.save(professor));
     }
 
     @Override
-    public Professor AddProfessor(Professor professor) {
-        return professorRepository.save(professor);
+    public List<ProfessorInterface> GetAllProfessor() {
+        List<ProfessorInterface> list = new ArrayList<>();
+        for(Professor prof: professorRepository.findAll()){
+            list.add(OutputFrame(prof));
+        }
+        return list;
     }
 
     @Override
-    public List<Professor> GetAllProfessor() {
-        return professorRepository.findAll();
+    public ProfessorInterface GetProfessorbyId(Long id){
+        return OutputFrame(GetProfessorObjectById(id));
     }
 
     @Override
-    public Professor GetProfessorById(Long id){
-        return professorRepository.findById(id).get();
+    public Professor GetProfessorObjectById(Long id){
+         System.out.println(professorRepository.findById(id).get().getNcode());
+         return professorRepository.findById(id).get();
     }
 
     @Override
-    public Professor UpdateProfessor(Professor professor) {
+    public ProfessorInterface UpdateProfessor(Professor professor) {
         Professor prof = professorRepository.findById(professor.getpid()).get();
 
         if(Objects.nonNull(professor.getPname()) && !professor.getPname().equals("")){
@@ -49,7 +58,7 @@ public class ProfessorServiceImpt implements ProfessorService{
             prof.setNcode(professor.getNcode());
         }
 
-        return professorRepository.save(prof);
+        return OutputFrame(professorRepository.save(prof));
     }
 
     @Override
@@ -63,5 +72,16 @@ public class ProfessorServiceImpt implements ProfessorService{
             if(prof.getNcode().equals(ncode)) return true;
         }
         return false;
+    }
+
+    @Override
+    public ProfessorInterface OutputFrame(Professor professor){
+        return new ProfessorInterface(
+                                     professor.getpid(),
+                                     professor.getPname(),
+                                     professor.getPfamily(),
+                                     professor.getNcode(),
+                                     professor.getClgid().getClgid()
+                                     );
     }
 }

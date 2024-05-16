@@ -11,6 +11,15 @@ public class ProfessorInterface {
 
     private Long clgid;
 
+    public ProfessorInterface(){}
+
+    public ProfessorInterface(Long pid, String pname, String pfamily, String ncode, Long clgid) {
+        this.pid = pid;
+        this.pname = pname;
+        this.pfamily = pfamily;
+        this.ncode = ncode;
+        this.clgid = clgid;
+    }
 
     public Long getpid() {
         return pid;

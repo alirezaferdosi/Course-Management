@@ -4,6 +4,8 @@ import com.example.coursemanagement.Model.Course;
 import com.example.coursemanagement.Model.Student;
 
 public class SectionInterface {
+    private Long id;
+
     private Long course;
 
     private Long student;
@@ -12,6 +14,23 @@ public class SectionInterface {
 
     private Integer term;
 
+    public SectionInterface(){}
+
+    public SectionInterface(Long id, Long course, Long student, Short score, Integer term) {
+        this.id = id;
+        this.course = course;
+        this.student = student;
+        this.score = score;
+        this.term = term;
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public void SetId(Long id){
+        this.id = id;
+    }
 
     public Short getScore() {
         return score;
