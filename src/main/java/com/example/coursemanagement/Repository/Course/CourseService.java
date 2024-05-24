@@ -1,29 +1,29 @@
 package com.example.coursemanagement.Repository.Course;
 
 import com.example.coursemanagement.Model.Course;
-import com.example.coursemanagement.Model.Interface.CourseInterface;
+import com.example.coursemanagement.Model.DTO.CourseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component("CourseService")
 public interface CourseService {
-    CourseInterface AddCourse(Course course);
+    CourseDTO AddCourse(Course course);
 
-    List<CourseInterface> GetAllCourse();
+    List<CourseDTO> GetAllCourse();
 
-    CourseInterface GetCourseById(Long id);
+    CourseDTO GetCourseById(Long id);
 
     Course GetCourseObjectById(Long id);
 
 
-    List<CourseInterface> GetAllCourseByCollegeId(Long id);
+    List<CourseDTO> GetAllCourseByCollegeId(Long id);
 
-    CourseInterface UpdateCourse(Course course);
+    CourseDTO UpdateCourse(Course course);
 
     void DeleteCourse(Long id);
 
     Boolean ExistCourse(Long id);
 
-    CourseInterface OutputFrame(Course course);
+    CourseDTO OutputFrame(Course course);
 }

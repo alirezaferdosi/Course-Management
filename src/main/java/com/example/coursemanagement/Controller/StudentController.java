@@ -1,6 +1,6 @@
 package com.example.coursemanagement.Controller;
 
-import com.example.coursemanagement.Model.Interface.StudentInterface;
+import com.example.coursemanagement.Model.DTO.StudentDTO;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Repository.Student.StudentService;
 import com.example.coursemanagement.Model.Student;
@@ -24,7 +24,7 @@ public class StudentController {
     private CollegeService collegeService;
 
     @PostMapping
-    public Object AddStudent(@RequestBody StudentInterface student){
+    public Object AddStudent(@RequestBody StudentDTO student){
         if(studentService.ExistStudent(student.getNcode())) return "Student is Exist";
         return studentService.AddStudent(new Student(
                                                     student.getSname(),
@@ -41,7 +41,7 @@ public class StudentController {
     }
 
     @PutMapping()
-    public Object UpdateStudent(@RequestBody StudentInterface student){
+    public Object UpdateStudent(@RequestBody StudentDTO student){
         if(student.getSid() == null) return "Student Id can not be null";
         return studentService.UpdateStudent(new Student(
                                                 student.getSid(),

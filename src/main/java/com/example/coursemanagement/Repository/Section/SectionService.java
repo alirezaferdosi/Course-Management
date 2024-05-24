@@ -1,6 +1,6 @@
 package com.example.coursemanagement.Repository.Section;
 
-import com.example.coursemanagement.Model.Interface.SectionInterface;
+import com.example.coursemanagement.Model.DTO.SectionDTO;
 import com.example.coursemanagement.Model.Section;
 
 import org.springframework.stereotype.Component;
@@ -8,21 +8,21 @@ import java.util.List;
 
 @Component("SectionService")
 public interface SectionService {
-    SectionInterface AddSection(Section section);
+    SectionDTO AddSection(Section section);
 
-    List<SectionInterface> GetAllSection();
+    List<SectionDTO> GetAllSection();
 
-    List<SectionInterface> GetAllSectionByCollegeId(String id);
+    List<SectionDTO> GetAllSectionByCollegeId(String id);
 
-    List<SectionInterface> GetAllSectionByProfessorId(String id);
+    List<SectionDTO> GetAllSectionByProfessorId(String id);
 
-    List<SectionInterface> GetAllSectionByStudentId(String id);
+    List<SectionDTO> GetAllSectionByStudentId(String id);
 
-    List<SectionInterface> GetAllSectionByTerm(Integer term);
+    List<SectionDTO> GetAllSectionByTerm(Integer term);
 
-    SectionInterface UpdateSection(Section section);
+    SectionDTO UpdateSection(Section section);
 
     void DeleteSection(Long id);
 
-    SectionInterface OutputFrame(Section section);
+    SectionDTO OutputFrame(Section section);
 }

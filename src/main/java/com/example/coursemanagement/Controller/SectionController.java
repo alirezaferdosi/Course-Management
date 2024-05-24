@@ -1,6 +1,6 @@
 package com.example.coursemanagement.Controller;
 
-import com.example.coursemanagement.Model.Interface.SectionInterface;
+import com.example.coursemanagement.Model.DTO.SectionDTO;
 import com.example.coursemanagement.Model.*;
 import com.example.coursemanagement.Repository.Course.CourseService;
 import com.example.coursemanagement.Repository.Section.*;
@@ -31,7 +31,7 @@ public class SectionController {
 
 
     @PostMapping
-    public SectionInterface AddSection(@RequestBody SectionInterface section){
+    public SectionDTO AddSection(@RequestBody SectionDTO section){
         return sectionService.AddSection(new Section(
                                                     courseService.GetCourseObjectById(section.getCourse()),
                                                     studentService.GetStudentObjectById(section.getStudent()),
@@ -41,32 +41,32 @@ public class SectionController {
     }
 
     @GetMapping
-    public List<SectionInterface> GetAllSection(){
+    public List<SectionDTO> GetAllSection(){
         return  sectionService.GetAllSection();
     }
 
     @GetMapping("ByCollegeId")
-    public List<SectionInterface> GetAllSectionByCollegeId(@RequestBody String id){
+    public List<SectionDTO> GetAllSectionByCollegeId(@RequestBody String id){
         return sectionService.GetAllSectionByCollegeId(id);
     }
 
     @GetMapping("ByProfessorId")
-    public List<SectionInterface> GetAllSectionByProfessorId(@RequestBody String id){
+    public List<SectionDTO> GetAllSectionByProfessorId(@RequestBody String id){
         return sectionService.GetAllSectionByProfessorId(id);
     }
 
     @GetMapping("ByStudentId")
-    public List<SectionInterface> GetAllSectionByStudentId(@RequestBody String id){
+    public List<SectionDTO> GetAllSectionByStudentId(@RequestBody String id){
         return sectionService.GetAllSectionByStudentId(id);
     }
 
     @GetMapping("ByTerm")
-    public List<SectionInterface> GetAllSectionByTerm(@RequestBody String term){
+    public List<SectionDTO> GetAllSectionByTerm(@RequestBody String term){
         return sectionService.GetAllSectionByTerm(Integer.valueOf(term));
     }
 
     @PutMapping
-    public SectionInterface UpdateSection(@RequestBody SectionInterface section){
+    public SectionDTO UpdateSection(@RequestBody SectionDTO section){
         return sectionService.UpdateSection(new Section(
                                                         section.getId(),
                                                         courseService.GetCourseObjectById(section.getCourse()),

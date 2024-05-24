@@ -1,15 +1,15 @@
-package com.example.coursemanagement.Model.Interface;
+package com.example.coursemanagement.Model.DTO;
 
-public class CollegeInterface {
+public class CollegeDTO {
     private Long clgid;
 
     private String clgname;
 
     private Long HDepartment;
 
-    public  CollegeInterface(){}
+    public CollegeDTO(){}
 
-    public CollegeInterface(Long clgid, String clgname, Long HDepartment) {
+    public CollegeDTO(Long clgid, String clgname, Long HDepartment) {
         this.clgid = clgid;
         this.clgname = clgname;
         this.HDepartment = HDepartment;

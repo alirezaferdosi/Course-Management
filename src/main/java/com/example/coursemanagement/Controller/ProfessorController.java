@@ -1,6 +1,6 @@
 package com.example.coursemanagement.Controller;
 
-import com.example.coursemanagement.Model.Interface.ProfessorInterface;
+import com.example.coursemanagement.Model.DTO.ProfessorDTO;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Repository.Professor.ProfessorService;
 import com.example.coursemanagement.Model.Professor;
@@ -24,7 +24,7 @@ public class ProfessorController {
     private CollegeService collegeService;
 
     @PostMapping
-    public Object AddProfessor(@RequestBody ProfessorInterface professor){
+    public Object AddProfessor(@RequestBody ProfessorDTO professor){
         if(professorService.ExistProfessor(professor.getNcode())) return "Professor is Exist";
 
         Professor prof = new Professor(professor.getPname(),
@@ -41,7 +41,7 @@ public class ProfessorController {
     }
 
     @PutMapping
-    public Object UpdateProfessor(@RequestBody ProfessorInterface professor){
+    public Object UpdateProfessor(@RequestBody ProfessorDTO professor){
         return professorService.UpdateProfessor(new Professor(
                                                        professor.getpid(),
                                                        professor.getPname(),

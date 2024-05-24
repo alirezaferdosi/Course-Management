@@ -1,7 +1,9 @@
-package com.example.coursemanagement.Repository.Course;
+package com.example.coursemanagement.Service;
 
 import com.example.coursemanagement.Model.Course;
-import com.example.coursemanagement.Model.Interface.CourseInterface;
+import com.example.coursemanagement.Model.DTO.CourseDTO;
+import com.example.coursemanagement.Repository.Course.CourseRepository;
+import com.example.coursemanagement.Repository.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +18,13 @@ public class CourseServiceImpt implements CourseService {
     private CourseRepository courseRepository;
 
     @Override
-    public CourseInterface AddCourse(Course course) {
+    public CourseDTO AddCourse(Course course) {
         return OutputFrame(courseRepository.save(course));
     }
 
     @Override
-    public List<CourseInterface> GetAllCourse() {
-        List<CourseInterface> list = new ArrayList<>();
+    public List<CourseDTO> GetAllCourse() {
+        List<CourseDTO> list = new ArrayList<>();
         for(Course crs: courseRepository.findAll()){
             list.add(OutputFrame(crs));
         }
@@ -30,7 +32,7 @@ public class CourseServiceImpt implements CourseService {
     }
 
     @Override
-    public CourseInterface GetCourseById(Long id){
+    public CourseDTO GetCourseById(Long id){
         return OutputFrame(GetCourseObjectById(id));
     }
 
@@ -40,8 +42,8 @@ public class CourseServiceImpt implements CourseService {
     }
 
     @Override
-    public List<CourseInterface> GetAllCourseByCollegeId(Long id) {
-        List<CourseInterface> list = new ArrayList();
+    public List<CourseDTO> GetAllCourseByCollegeId(Long id) {
+        List<CourseDTO> list = new ArrayList();
         for(Course course: courseRepository.findAll()){
             if(Objects.equals(course.getClg().getClgid(), id)){
                 list.add(OutputFrame(course));
@@ -51,7 +53,7 @@ public class CourseServiceImpt implements CourseService {
     }
 
     @Override
-    public CourseInterface UpdateCourse(Course course) {
+    public CourseDTO UpdateCourse(Course course) {
         Course crs = courseRepository.findById(course.getCid()).get();
 
         if(course.getCname() != null && !course.getCname().equals("")){
@@ -81,8 +83,8 @@ public class CourseServiceImpt implements CourseService {
     }
 
     @Override
-    public CourseInterface OutputFrame(Course course){
-        return new CourseInterface(
+    public CourseDTO OutputFrame(Course course){
+        return new CourseDTO(
                                     course.getCid(),
                                     course.getCname(),
                                     course.getUnit(),

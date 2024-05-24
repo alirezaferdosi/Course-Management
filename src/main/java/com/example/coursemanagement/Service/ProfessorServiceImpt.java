@@ -1,8 +1,10 @@
-package com.example.coursemanagement.Repository.Professor;
+package com.example.coursemanagement.Service;
 
-import com.example.coursemanagement.Model.Interface.ProfessorInterface;
+import com.example.coursemanagement.Model.DTO.ProfessorDTO;
 import com.example.coursemanagement.Model.Professor;
 import com.example.coursemanagement.Repository.College.CollegeRepository;
+import com.example.coursemanagement.Repository.Professor.ProfessorRepository;
+import com.example.coursemanagement.Repository.Professor.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,22 +13,23 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class ProfessorServiceImpt implements ProfessorService{
+public class ProfessorServiceImpt implements ProfessorService {
 
     @Autowired
     private ProfessorRepository professorRepository;
+
     @Autowired
     private CollegeRepository collegeRepository;
 
 
     @Override
-    public ProfessorInterface AddProfessor(Professor professor) {
+    public ProfessorDTO AddProfessor(Professor professor) {
         return OutputFrame(professorRepository.save(professor));
     }
 
     @Override
-    public List<ProfessorInterface> GetAllProfessor() {
-        List<ProfessorInterface> list = new ArrayList<>();
+    public List<ProfessorDTO> GetAllProfessor() {
+        List<ProfessorDTO> list = new ArrayList<>();
         for(Professor prof: professorRepository.findAll()){
             list.add(OutputFrame(prof));
         }
@@ -34,7 +37,7 @@ public class ProfessorServiceImpt implements ProfessorService{
     }
 
     @Override
-    public ProfessorInterface GetProfessorbyId(Long id){
+    public ProfessorDTO GetProfessorbyId(Long id){
         return OutputFrame(GetProfessorObjectById(id));
     }
 
@@ -45,7 +48,7 @@ public class ProfessorServiceImpt implements ProfessorService{
     }
 
     @Override
-    public ProfessorInterface UpdateProfessor(Professor professor) {
+    public ProfessorDTO UpdateProfessor(Professor professor) {
         Professor prof = professorRepository.findById(professor.getpid()).get();
 
         if(Objects.nonNull(professor.getPname()) && !professor.getPname().equals("")){
@@ -75,8 +78,8 @@ public class ProfessorServiceImpt implements ProfessorService{
     }
 
     @Override
-    public ProfessorInterface OutputFrame(Professor professor){
-        return new ProfessorInterface(
+    public ProfessorDTO OutputFrame(Professor professor){
+        return new ProfessorDTO(
                                      professor.getpid(),
                                      professor.getPname(),
                                      professor.getPfamily(),

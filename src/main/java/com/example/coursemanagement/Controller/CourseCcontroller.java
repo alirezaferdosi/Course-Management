@@ -1,6 +1,6 @@
 package com.example.coursemanagement.Controller;
 
-import com.example.coursemanagement.Model.Interface.CourseInterface;
+import com.example.coursemanagement.Model.DTO.CourseDTO;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Repository.Course.CourseService;
 import com.example.coursemanagement.Model.Course;
@@ -32,7 +32,7 @@ public class CourseCcontroller {
 
 
     @PostMapping
-    public CourseInterface AddCourse(@RequestBody CourseInterface course){
+    public CourseDTO AddCourse(@RequestBody CourseDTO course){
         return courseService.AddCourse(new Course(
                                                  course.getCname(),
                                                  course.getUnit(),
@@ -42,17 +42,17 @@ public class CourseCcontroller {
     }
 
     @GetMapping
-    public List<CourseInterface> GetAllCourse(){
+    public List<CourseDTO> GetAllCourse(){
         return  courseService.GetAllCourse();
     }
 
     @GetMapping("SC")
-    public List<CourseInterface> GetAllCourseByCollegeId(@RequestBody String id){
+    public List<CourseDTO> GetAllCourseByCollegeId(@RequestBody String id){
         return courseService.GetAllCourseByCollegeId(Long.valueOf(id));
     }
 
     @PutMapping
-    public CourseInterface UpdateCourse(@RequestBody CourseInterface course){
+    public CourseDTO UpdateCourse(@RequestBody CourseDTO course){
         return courseService.UpdateCourse(new Course(
                                                     course.getCid(),
                                                     course.getCname(),

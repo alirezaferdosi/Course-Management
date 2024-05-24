@@ -1,8 +1,10 @@
 package com.example.coursemanagement.Controller;
 
-import com.example.coursemanagement.Model.Interface.CollegeInterface;
+import com.example.coursemanagement.Model.DTO.CollegeDTO;
+import com.example.coursemanagement.Model.DTO.Converter.ConvertObject;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Model.College;
+import com.example.coursemanagement.Model.DTO.Converter.CollegeConverter;
 
 import com.example.coursemanagement.Repository.Professor.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,34 +33,37 @@ public class CollegeController {
     @Qualifier("professorServiceImpt")
     private ProfessorService professorService;
 
+    @Autowired
+    @Qualifier("CollegeConverter")
+    private ConvertObject<College,CollegeDTO> convertObject;
+
 
     @PostMapping
-    public Object AddCollege(@Valid @RequestBody CollegeInterface college){
+    public Object AddCollege(@Valid @RequestBody CollegeDTO college){
         if(collegeService.ExistCollege(college.getClgname())) return "College is exist";
 
         if(college.getHDepartment() != null){
-            return collegeService.AddCollege(new College(
-                                                        college.getClgname(),
-                                                        professorService.GetProfessorObjectById(college.getHDepartment())
-                                                        ));
+            return collegeService.AddCollege(convertObject.ConvertDtoToEntity(college));
         }else{
-            return collegeService.AddCollege(new College(college.getClgname()));
+            return collegeService.AddCollege(convertObject.ConvertDtoToEntity(college));
         }
 
     }
 
     @GetMapping("/all")
-    public List<CollegeInterface> GetAllCollege(){
-        return collegeService.GetAllCollege();
+    public List<CollegeDTO> GetAllCollege(){
+        return collegeService.GetAllCollege()
+                                            .stream()
+                                            .map(item -> convertObject.ConvertEntityToDto(item)).toList();
     }
 
     @GetMapping("/{id}")
-    public CollegeInterface GetCollegeById(@PathVariable("id") Long id){
-        return collegeService.GetCollegeById(id);
+    public CollegeDTO GetCollegeById(@PathVariable("id") Long id){
+        return convertObject.ConvertEntityToDto(collegeService.GetCollegeById(id));
     }
 
     @PutMapping()
-    public Object UpdateCollege(@Valid @RequestBody CollegeInterface college){
+    public Object UpdateCollege(@Valid @RequestBody CollegeDTO college){
         if(collegeService.ExistCollege(college.getClgname())) return "College is exist";
 
         return collegeService.UpdateCollege(new College(

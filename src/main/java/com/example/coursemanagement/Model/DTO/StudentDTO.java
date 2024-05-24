@@ -1,8 +1,6 @@
-package com.example.coursemanagement.Model.Interface;
+package com.example.coursemanagement.Model.DTO;
 
-import com.example.coursemanagement.Model.College;
-
-public class StudentInterface {
+public class StudentDTO {
     private Long sid;
 
     private String sname;
@@ -15,9 +13,9 @@ public class StudentInterface {
 
     private Long clgid;
 
-    public StudentInterface(){}
+    public StudentDTO(){}
 
-    public StudentInterface(Long sid, String sname, String sfamily, String ncode, String address, Long clgid) {
+    public StudentDTO(Long sid, String sname, String sfamily, String ncode, String address, Long clgid) {
         this.sid = sid;
         this.sname = sname;
         this.sfamily = sfamily;

@@ -1,7 +1,9 @@
-package com.example.coursemanagement.Repository.Student;
+package com.example.coursemanagement.Service;
 
-import com.example.coursemanagement.Model.Interface.StudentInterface;
+import com.example.coursemanagement.Model.DTO.StudentDTO;
 import com.example.coursemanagement.Model.Student;
+import com.example.coursemanagement.Repository.Student.StudentRepository;
+import com.example.coursemanagement.Repository.Student.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class StudentServiceImpt implements StudentService{
+public class StudentServiceImpt implements StudentService {
 
     private final StudentRepository studentRepository;
 
@@ -19,13 +21,13 @@ public class StudentServiceImpt implements StudentService{
 
 
     @Override
-    public StudentInterface AddStudent(Student student) {
+    public StudentDTO AddStudent(Student student) {
         return OutputFrame(studentRepository.save(student));
     }
 
     @Override
-    public List<StudentInterface> GetAllStudent() {
-        List<StudentInterface> list = new ArrayList<>();
+    public List<StudentDTO> GetAllStudent() {
+        List<StudentDTO> list = new ArrayList<>();
         for(Student stud: studentRepository.findAll()){
             list.add(OutputFrame(stud));
         }
@@ -38,12 +40,12 @@ public class StudentServiceImpt implements StudentService{
     }
 
     @Override
-    public StudentInterface GetStudentById(Long id){
+    public StudentDTO GetStudentById(Long id){
         return OutputFrame(GetStudentObjectById(id));
     }
 
     @Override
-    public StudentInterface UpdateStudent(Student student) {
+    public StudentDTO UpdateStudent(Student student) {
         Student stud = studentRepository.findById(student.getSid()).get();
 
         if(Objects.nonNull(student.getSname()) && !student.getSname().equals("")){
@@ -86,8 +88,8 @@ public class StudentServiceImpt implements StudentService{
     }
 
     @Override
-    public StudentInterface OutputFrame(Student student){
-        return new StudentInterface(
+    public StudentDTO OutputFrame(Student student){
+        return new StudentDTO(
                                     student.getSid(),
                                     student.getSname(),
                                     student.getSfamily(),

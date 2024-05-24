@@ -1,6 +1,6 @@
-package com.example.coursemanagement.Model.Interface;
+package com.example.coursemanagement.Model.DTO;
 
-public class ProfessorInterface {
+public class ProfessorDTO {
     private Long pid;
 
     private String pname;
@@ -11,9 +11,9 @@ public class ProfessorInterface {
 
     private Long clgid;
 
-    public ProfessorInterface(){}
+    public ProfessorDTO(){}
 
-    public ProfessorInterface(Long pid, String pname, String pfamily, String ncode, Long clgid) {
+    public ProfessorDTO(Long pid, String pname, String pfamily, String ncode, Long clgid) {
         this.pid = pid;
         this.pname = pname;
         this.pfamily = pfamily;

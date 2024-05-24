@@ -1,6 +1,6 @@
 package com.example.coursemanagement.Repository.Professor;
 
-import com.example.coursemanagement.Model.Interface.ProfessorInterface;
+import com.example.coursemanagement.Model.DTO.ProfessorDTO;
 import com.example.coursemanagement.Model.Professor;
 import org.springframework.stereotype.Component;
 
@@ -8,19 +8,19 @@ import java.util.List;
 
 @Component("ProfessorService")
 public interface ProfessorService {
-    ProfessorInterface AddProfessor(Professor professor);
+    ProfessorDTO AddProfessor(Professor professor);
 
-    List<ProfessorInterface> GetAllProfessor();
+    List<ProfessorDTO> GetAllProfessor();
 
     Professor GetProfessorObjectById(Long id);
 
-    ProfessorInterface GetProfessorbyId(Long id);
+    ProfessorDTO GetProfessorbyId(Long id);
 
-    ProfessorInterface UpdateProfessor(Professor professor);
+    ProfessorDTO UpdateProfessor(Professor professor);
 
     void DeleteProfessor(Long id);
 
     Boolean ExistProfessor(String ncode);
 
-    ProfessorInterface OutputFrame(Professor professor);
+    ProfessorDTO OutputFrame(Professor professor);
 }

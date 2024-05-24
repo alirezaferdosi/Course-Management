@@ -1,6 +1,6 @@
-package com.example.coursemanagement.Model.Interface;
+package com.example.coursemanagement.Model.DTO;
 
-public class CourseInterface {
+public class CourseDTO {
 
     private Long cid;
 
@@ -12,9 +12,9 @@ public class CourseInterface {
 
     private Long profid;
 
-    public CourseInterface(){}
+    public CourseDTO(){}
 
-    public CourseInterface(Long cid, String cname, Integer unit, Long clgid, Long Profid) {
+    public CourseDTO(Long cid, String cname, Integer unit, Long clgid, Long Profid) {
         this.cid = cid;
         this.cname = cname;
         this.unit = unit;

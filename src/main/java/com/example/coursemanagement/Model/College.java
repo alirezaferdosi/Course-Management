@@ -2,17 +2,14 @@ package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
 
-@Service
 @Entity
 @Table(name = "College")
 @Component
-//@NamedQuery(name = "add college" , query = "INSERT INTO College(clgname,HDepartment)  String VALUES(:clgname,:HDepartment)")
-public class College{
+public class College {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

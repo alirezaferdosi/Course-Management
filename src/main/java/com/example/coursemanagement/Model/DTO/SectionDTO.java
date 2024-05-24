@@ -1,9 +1,6 @@
-package com.example.coursemanagement.Model.Interface;
+package com.example.coursemanagement.Model.DTO;
 
-import com.example.coursemanagement.Model.Course;
-import com.example.coursemanagement.Model.Student;
-
-public class SectionInterface {
+public class SectionDTO {
     private Long id;
 
     private Long course;
@@ -14,9 +11,9 @@ public class SectionInterface {
 
     private Integer term;
 
-    public SectionInterface(){}
+    public SectionDTO(){}
 
-    public SectionInterface(Long id, Long course, Long student, Short score, Integer term) {
+    public SectionDTO(Long id, Long course, Long student, Short score, Integer term) {
         this.id = id;
         this.course = course;
         this.student = student;

@@ -3,25 +3,25 @@ import com.example.coursemanagement.Model.College;
 
 import java.util.List;
 
-import com.example.coursemanagement.Model.Interface.CollegeInterface;
+import com.example.coursemanagement.Model.DTO.CollegeDTO;
 import org.springframework.stereotype.Component;
 
 
 @Component("CollegeService")
 public interface CollegeService {
-    CollegeInterface AddCollege(College college);
+    College AddCollege(College college);
 
-    List<CollegeInterface> GetAllCollege();
+    List<College> GetAllCollege();
 
     College GetCollegeObjectById(Long id);
 
-    CollegeInterface GetCollegeById(Long id);
+    College GetCollegeById(Long id);
 
-    CollegeInterface UpdateCollege(College college);
+    College UpdateCollege(College college);
 
     void DeleteCollege(Long id);
 
     Boolean ExistCollege(String name);
 
-    CollegeInterface OutputFrame(College clg);
+//    CollegeDTO OutputFrame(College clg);
 }
