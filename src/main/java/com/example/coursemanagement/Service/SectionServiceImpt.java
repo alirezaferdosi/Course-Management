@@ -6,6 +6,7 @@ import com.example.coursemanagement.Repository.Course.CourseRepository;
 import com.example.coursemanagement.Repository.Section.SectionRepository;
 import com.example.coursemanagement.Repository.Section.SectionService;
 import com.example.coursemanagement.Repository.Student.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,66 +28,73 @@ public class SectionServiceImpt implements SectionService {
 
 
     @Override
-    public SectionDTO AddSection(Section section) {
-        return OutputFrame(sectionRepository.save(section));
+    @Transactional
+    public Section AddSection(Section section) {
+        return sectionRepository.save(section);
     }
 
     @Override
-    public List<SectionDTO> GetAllSection() {
-        List<SectionDTO> list = new ArrayList<>();
+    @Transactional
+    public List<Section> GetAllSection() {
+        List<Section> list = new ArrayList<>();
         for (Section sec : sectionRepository.findAll()) {
-            list.add(OutputFrame(sec));
+            list.add(sec);
         }
         return list;
     }
 
     @Override
-    public List<SectionDTO> GetAllSectionByCollegeId(String id) {
-        List<SectionDTO> list = new ArrayList();
+    @Transactional
+    public List<Section> GetAllSectionByCollegeId(String id) {
+        List<Section> list = new ArrayList();
         for (Section sec : sectionRepository.findAll()) {
             if (sec.getCourse().getClg().getClgid().equals(id)) {
-                list.add(OutputFrame(sec));
+                list.add(sec);
             }
         }
         return list;
     }
 
     @Override
-    public List<SectionDTO> GetAllSectionByProfessorId(String id) {
+    @Transactional
+    public List<Section> GetAllSectionByProfessorId(String id) {
 
-        List<SectionDTO> list = new ArrayList();
+        List<Section> list = new ArrayList();
         for (Section sec : sectionRepository.findAll()) {
-            if (sec.getCourse().getProf().getpid().equals(id)) {
-                list.add(OutputFrame(sec));
+            if (sec.getCourse().getProf().getPid().equals(id)) {
+                list.add(sec);
             }
         }
         return list;
     }
 
     @Override
-    public List<SectionDTO> GetAllSectionByStudentId(String id) {
-        List<SectionDTO> list = new ArrayList();
+    @Transactional
+    public List<Section> GetAllSectionByStudentId(String id) {
+        List<Section> list = new ArrayList();
         for (Section sec : sectionRepository.findAll()) {
             if (sec.getStudent().getSid().equals(id)) {
-                list.add(OutputFrame(sec));
+                list.add(sec);
             }
         }
         return list;
     }
 
     @Override
-    public List<SectionDTO> GetAllSectionByTerm(Integer term) {
-        List<SectionDTO> list = new ArrayList();
+    @Transactional
+    public List<Section> GetAllSectionByTerm(Integer term) {
+        List<Section> list = new ArrayList();
         for (Section sec : sectionRepository.findAll()) {
             if (Objects.equals(sec.getTerm(), term)) {
-                list.add(OutputFrame(sec));
+                list.add(sec);
             }
         }
         return list;
     }
 
     @Override
-    public SectionDTO UpdateSection(Section section) {
+    @Transactional
+    public Section UpdateSection(Section section) {
         Section sec = null;
         for (Section s : sectionRepository.findAll()) {
             if (s.getId() == section.getId()) sec = s;
@@ -107,24 +115,14 @@ public class SectionServiceImpt implements SectionService {
             sec.setScore(section.getScore());
         }
 
-        return OutputFrame(sectionRepository.save(sec));
+        return sectionRepository.save(sec);
     }
 
     @Override
+    @Transactional
     public void DeleteSection(Long id) {
         for(Section sec: sectionRepository.findAll()){
             if(sec.getId() == id) sectionRepository.delete(sec);
         }
-    }
-
-    @Override
-    public SectionDTO OutputFrame(Section section){
-        return new SectionDTO(
-                                    section.getId(),
-                                    section.getCourse().getCid(),
-                                    section.getStudent().getSid(),
-                                    section.getScore(),
-                                    section.getTerm()
-                                    );
     }
 }

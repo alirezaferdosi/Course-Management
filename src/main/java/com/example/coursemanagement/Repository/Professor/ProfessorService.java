@@ -8,19 +8,17 @@ import java.util.List;
 
 @Component("ProfessorService")
 public interface ProfessorService {
-    ProfessorDTO AddProfessor(Professor professor);
+    Professor AddProfessor(Professor professor);
 
-    List<ProfessorDTO> GetAllProfessor();
+    List<Professor> GetAllProfessor();
 
     Professor GetProfessorObjectById(Long id);
 
-    ProfessorDTO GetProfessorbyId(Long id);
+    Professor GetProfessorbyId(Long id);
 
-    ProfessorDTO UpdateProfessor(Professor professor);
+    Professor UpdateProfessor(Professor professor);
 
     void DeleteProfessor(Long id);
 
     Boolean ExistProfessor(String ncode);
-
-    ProfessorDTO OutputFrame(Professor professor);
 }

@@ -8,21 +8,19 @@ import java.util.List;
 
 @Component("SectionService")
 public interface SectionService {
-    SectionDTO AddSection(Section section);
+    Section AddSection(Section section);
 
-    List<SectionDTO> GetAllSection();
+    List<Section> GetAllSection();
 
-    List<SectionDTO> GetAllSectionByCollegeId(String id);
+    List<Section> GetAllSectionByCollegeId(String id);
 
-    List<SectionDTO> GetAllSectionByProfessorId(String id);
+    List<Section> GetAllSectionByProfessorId(String id);
 
-    List<SectionDTO> GetAllSectionByStudentId(String id);
+    List<Section> GetAllSectionByStudentId(String id);
 
-    List<SectionDTO> GetAllSectionByTerm(Integer term);
+    List<Section> GetAllSectionByTerm(Integer term);
 
-    SectionDTO UpdateSection(Section section);
+    Section UpdateSection(Section section);
 
     void DeleteSection(Long id);
-
-    SectionDTO OutputFrame(Section section);
 }

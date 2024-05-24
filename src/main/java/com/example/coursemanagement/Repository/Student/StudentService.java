@@ -8,22 +8,19 @@ import java.util.List;
 
 @Component("StudentService")
 public interface StudentService {
-    StudentDTO AddStudent(Student student);
+    Student AddStudent(Student student);
 
-    List<StudentDTO> GetAllStudent();
+    List<Student> GetAllStudent();
 
     Student GetStudentObjectById(Long id);
 
-    StudentDTO GetStudentById(Long id);
+    Student GetStudentById(Long id);
 
-    StudentDTO UpdateStudent(Student student);
+    Student UpdateStudent(Student student);
 
     void DeleteStudentById(Long id);
 
     void DeleteStudentByNationalcode(String ncode);
 
     Boolean ExistStudent(String ncode);
-
-    StudentDTO OutputFrame(Student student);
-
 }

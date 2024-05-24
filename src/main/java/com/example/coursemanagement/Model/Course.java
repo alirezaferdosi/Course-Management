@@ -1,10 +1,14 @@
 package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import javax.validation.constraints.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Course")
 public class Course {
@@ -46,43 +50,6 @@ public class Course {
         this.unit = unit;
         this.clg = clgid;
         this.prof = profid;
-    }
-
-
-    public Long getCid() {
-        return cid;
-    }
-
-    public String getCname() {
-        return cname;
-    }
-
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
-
-    public Integer getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Integer unit) {
-        this.unit = unit;
-    }
-
-    public College getClg() {
-        return clg;
-    }
-
-    public void setClg(College clg) {
-        this.clg = clg;
-    }
-
-    public Professor getProf() {
-        return prof;
-    }
-
-    public void setProf(Professor prof) {
-        this.prof = prof;
     }
 }
 

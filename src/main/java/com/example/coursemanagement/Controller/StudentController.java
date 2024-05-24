@@ -1,5 +1,6 @@
 package com.example.coursemanagement.Controller;
 
+import com.example.coursemanagement.Model.DTO.Converter.ConvertObject;
 import com.example.coursemanagement.Model.DTO.StudentDTO;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Repository.Student.StudentService;
@@ -23,34 +24,29 @@ public class StudentController {
     @Qualifier("collegeServiceImpt")
     private CollegeService collegeService;
 
+    @Autowired
+    @Qualifier("StudentConverter")
+    private ConvertObject<Student,StudentDTO> convertObject;
+
+
     @PostMapping
     public Object AddStudent(@RequestBody StudentDTO student){
         if(studentService.ExistStudent(student.getNcode())) return "Student is Exist";
-        return studentService.AddStudent(new Student(
-                                                    student.getSname(),
-                                                    student.getSfamily(),
-                                                    student.getNcode(),
-                                                    student.getAddress(),
-                                                    collegeService.GetCollegeObjectById(student.getClgid())
-                                                    ));
+        return studentService.AddStudent(convertObject.ConvertDtoToEntity(student));
     }
 
     @GetMapping
     public Object GetAllStudent(){
-        return studentService.GetAllStudent();
+        return studentService.GetAllStudent()
+               .stream()
+               .map(item -> convertObject.ConvertEntityToDto(item))
+               .toList();
     }
 
-    @PutMapping()
+    @PutMapping
     public Object UpdateStudent(@RequestBody StudentDTO student){
         if(student.getSid() == null) return "Student Id can not be null";
-        return studentService.UpdateStudent(new Student(
-                                                student.getSid(),
-                                                student.getSname(),
-                                                student.getSfamily(),
-                                                student.getNcode(),
-                                                student.getAddress(),
-                                                collegeService.GetCollegeObjectById(student.getClgid())
-                                                ));
+        return convertObject.ConvertEntityToDto(studentService.UpdateStudent(convertObject.ConvertDtoToEntity(student)));
     }
 
     @DeleteMapping("/id")

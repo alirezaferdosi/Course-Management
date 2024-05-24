@@ -4,7 +4,6 @@ import com.example.coursemanagement.Model.DTO.CollegeDTO;
 import com.example.coursemanagement.Model.DTO.Converter.ConvertObject;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Model.College;
-import com.example.coursemanagement.Model.DTO.Converter.CollegeConverter;
 
 import com.example.coursemanagement.Repository.Professor.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class CollegeController {
         if(collegeService.ExistCollege(college.getClgname())) return "College is exist";
 
         if(college.getHDepartment() != null){
-            return collegeService.AddCollege(convertObject.ConvertDtoToEntity(college));
+            return convertObject.ConvertEntityToDto(collegeService.AddCollege(convertObject.ConvertDtoToEntity(college)));
         }else{
             return collegeService.AddCollege(convertObject.ConvertDtoToEntity(college));
         }

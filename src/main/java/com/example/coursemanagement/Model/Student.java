@@ -1,7 +1,13 @@
 package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.*;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "Student")
 public class Student {
@@ -48,50 +54,5 @@ public class Student {
         this.ncode = ncode;
         this.address = address;
         this.clg = clgid;
-    }
-
-
-    public Long getSid() {
-        return sid;
-    }
-
-    public String getSname() {
-        return sname;
-    }
-
-    public void setSname(String sname) {
-        this.sname = sname;
-    }
-
-    public String getSfamily() {
-        return sfamily;
-    }
-
-    public void setSfamily(String sfamily) {
-        this.sfamily = sfamily;
-    }
-
-    public String getNcode() {
-        return ncode;
-    }
-
-    public void setNcode(String ncode) {
-        this.ncode = ncode;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public College getClg() {
-        return clg;
-    }
-
-    public void setClg(College clg) {
-        this.clg = clg;
     }
 }

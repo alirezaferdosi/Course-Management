@@ -1,14 +1,18 @@
 package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Max;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "College")
-@Component
 public class College {
 
     @Id
@@ -39,27 +43,6 @@ public class College {
     public College(Long clgid, String clgname, Professor HDepartment){
         this.clgid = clgid;
         this.clgname = clgname;
-        this.HDepartment = HDepartment;
-    }
-
-
-    public Long getClgid() {
-        return clgid;
-    }
-
-    public String getClgname() {
-        return clgname;
-    }
-
-    public void setClggename(String clggename) {
-        this.clgname = clggename;
-    }
-
-    public Professor getHDepartment() {
-        return HDepartment;
-    }
-
-    public void setHDepartment(Professor HDepartment) {
         this.HDepartment = HDepartment;
     }
 }

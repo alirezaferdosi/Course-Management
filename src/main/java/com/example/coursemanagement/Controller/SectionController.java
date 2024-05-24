@@ -1,5 +1,6 @@
 package com.example.coursemanagement.Controller;
 
+import com.example.coursemanagement.Model.DTO.Converter.ConvertObject;
 import com.example.coursemanagement.Model.DTO.SectionDTO;
 import com.example.coursemanagement.Model.*;
 import com.example.coursemanagement.Repository.Course.CourseService;
@@ -22,58 +23,58 @@ public class SectionController {
     private SectionService sectionService;
 
     @Autowired
-    @Qualifier("courseServiceImpt")
-    private CourseService courseService;
-
-    @Autowired
-    @Qualifier("studentServiceImpt")
-    private StudentService studentService;
+    @Qualifier("SectionConverter")
+    private ConvertObject<Section,SectionDTO> convertObject;
 
 
     @PostMapping
     public SectionDTO AddSection(@RequestBody SectionDTO section){
-        return sectionService.AddSection(new Section(
-                                                    courseService.GetCourseObjectById(section.getCourse()),
-                                                    studentService.GetStudentObjectById(section.getStudent()),
-                                                    section.getTerm(),
-                                                    section.getScore()
-                                                    ));
+        return convertObject.ConvertEntityToDto(sectionService.AddSection(convertObject.ConvertDtoToEntity(section)));
     }
 
     @GetMapping
     public List<SectionDTO> GetAllSection(){
-        return  sectionService.GetAllSection();
+        return  sectionService.GetAllSection()
+                .stream()
+                .map(item -> convertObject.ConvertEntityToDto(item))
+                .toList();
     }
 
     @GetMapping("ByCollegeId")
     public List<SectionDTO> GetAllSectionByCollegeId(@RequestBody String id){
-        return sectionService.GetAllSectionByCollegeId(id);
+        return sectionService.GetAllSectionByCollegeId(id)
+                .stream()
+                .map(item -> convertObject.ConvertEntityToDto(item))
+                .toList();
     }
 
     @GetMapping("ByProfessorId")
     public List<SectionDTO> GetAllSectionByProfessorId(@RequestBody String id){
-        return sectionService.GetAllSectionByProfessorId(id);
+        return sectionService.GetAllSectionByProfessorId(id)
+                .stream()
+                .map(item -> convertObject.ConvertEntityToDto(item))
+                .toList();
     }
 
     @GetMapping("ByStudentId")
     public List<SectionDTO> GetAllSectionByStudentId(@RequestBody String id){
-        return sectionService.GetAllSectionByStudentId(id);
+        return sectionService.GetAllSectionByStudentId(id)
+                .stream()
+                .map(item -> convertObject.ConvertEntityToDto(item))
+                .toList();
     }
 
     @GetMapping("ByTerm")
     public List<SectionDTO> GetAllSectionByTerm(@RequestBody String term){
-        return sectionService.GetAllSectionByTerm(Integer.valueOf(term));
+        return sectionService.GetAllSectionByTerm(Integer.valueOf(term))
+                .stream()
+                .map(item -> convertObject.ConvertEntityToDto(item))
+                .toList();
     }
 
     @PutMapping
     public SectionDTO UpdateSection(@RequestBody SectionDTO section){
-        return sectionService.UpdateSection(new Section(
-                                                        section.getId(),
-                                                        courseService.GetCourseObjectById(section.getCourse()),
-                                                        studentService.GetStudentObjectById(section.getStudent()),
-                                                        section.getTerm(),
-                                                        section.getScore()
-                                                        ));
+        return convertObject.ConvertEntityToDto(sectionService.UpdateSection(convertObject.ConvertDtoToEntity(section)));
     }
 
     @DeleteMapping

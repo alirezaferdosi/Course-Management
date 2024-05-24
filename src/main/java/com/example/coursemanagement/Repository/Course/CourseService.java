@@ -8,22 +8,20 @@ import java.util.List;
 
 @Component("CourseService")
 public interface CourseService {
-    CourseDTO AddCourse(Course course);
+    Course AddCourse(Course course);
 
-    List<CourseDTO> GetAllCourse();
+    List<Course> GetAllCourse();
 
-    CourseDTO GetCourseById(Long id);
+    Course GetCourseById(Long id);
 
     Course GetCourseObjectById(Long id);
 
 
-    List<CourseDTO> GetAllCourseByCollegeId(Long id);
+    List<Course> GetAllCourseByCollegeId(Long id);
 
-    CourseDTO UpdateCourse(Course course);
+    Course UpdateCourse(Course course);
 
     void DeleteCourse(Long id);
 
     Boolean ExistCourse(Long id);
-
-    CourseDTO OutputFrame(Course course);
 }

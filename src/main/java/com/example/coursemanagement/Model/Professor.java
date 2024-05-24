@@ -1,8 +1,13 @@
 package com.example.coursemanagement.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.Max;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Professor")
 public class Professor {
@@ -24,7 +29,7 @@ public class Professor {
 
     @ManyToOne(targetEntity = College.class)
     @JoinColumn(name = "College_name", nullable = false)
-    private College clgid;
+    private College clg;
 
 
     public Professor(){}
@@ -33,7 +38,7 @@ public class Professor {
         this.pname = pname;
         this.pfamily = pfamily;
         this.ncode = ncode;
-        this.clgid = clgid;
+        this.clg = clgid;
     }
 
     public Professor(Long pid, String pname, String pfamily, String ncode, College clgid) {
@@ -41,43 +46,6 @@ public class Professor {
         this.pname = pname;
         this.pfamily = pfamily;
         this.ncode = ncode;
-        this.clgid = clgid;
-    }
-
-
-    public Long getpid() {
-        return pid;
-    }
-
-    public String getPname() {
-        return pname;
-    }
-
-    public void setPname(String pname) {
-        this.pname = pname;
-    }
-
-    public String getPfamily() {
-        return pfamily;
-    }
-
-    public void setPfamily(String pfamily) {
-        this.pfamily = pfamily;
-    }
-
-    public String getNcode() {
-        return ncode;
-    }
-
-    public void setNcode(String ncode) {
-        this.ncode = ncode;
-    }
-
-    public College getClgid() {
-        return clgid;
-    }
-
-    public void setClgid(College clgid) {
-        this.clgid = clgid;
+        this.clg = clgid;
     }
 }

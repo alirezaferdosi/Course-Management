@@ -1,5 +1,6 @@
 package com.example.coursemanagement.Controller;
 
+import com.example.coursemanagement.Model.DTO.Converter.ConvertObject;
 import com.example.coursemanagement.Model.DTO.ProfessorDTO;
 import com.example.coursemanagement.Repository.College.CollegeService;
 import com.example.coursemanagement.Repository.Professor.ProfessorService;
@@ -20,35 +21,28 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @Autowired
-    @Qualifier("collegeServiceImpt")
-    private CollegeService collegeService;
+    @Qualifier("ProfessorConverter")
+    private ConvertObject<Professor,ProfessorDTO> convertObject;
+
 
     @PostMapping
     public Object AddProfessor(@RequestBody ProfessorDTO professor){
-        if(professorService.ExistProfessor(professor.getNcode())) return "Professor is Exist";
-
-        Professor prof = new Professor(professor.getPname(),
-                                       professor.getPfamily(),
-                                       professor.getNcode(),
-                                       collegeService.GetCollegeObjectById(professor.getClgid()));
-
-        return professorService.AddProfessor(prof);
+        if(professorService.ExistProfessor(professor.getNcode()))
+        return "Professor is Exist";
+        return convertObject.ConvertEntityToDto(professorService.AddProfessor(convertObject.ConvertDtoToEntity(professor)));
     }
 
     @GetMapping("/all")
     public Object GetAllProfessor(){
-        return professorService.GetAllProfessor();
+        return professorService.GetAllProfessor()
+                .stream()
+                .map(item -> convertObject.ConvertEntityToDto(item))
+                .toList();
     }
 
     @PutMapping
     public Object UpdateProfessor(@RequestBody ProfessorDTO professor){
-        return professorService.UpdateProfessor(new Professor(
-                                                       professor.getpid(),
-                                                       professor.getPname(),
-                                                       professor.getPfamily(),
-                                                       professor.getNcode(),
-                                                       collegeService.GetCollegeObjectById(professor.getClgid())
-                                                       ));
+        return  convertObject.ConvertEntityToDto(professorService.UpdateProfessor(convertObject.ConvertDtoToEntity(professor)));
     }
 
     @DeleteMapping

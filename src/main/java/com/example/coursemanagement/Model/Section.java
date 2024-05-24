@@ -12,29 +12,6 @@ public class Section {
 
     @EmbeddedId
     private SectionKey id;
-/*
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "Course_id")
-//    @MapsId("course")
-    private Course course;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "Student_id")
-//    @MapsId("student")
-    private Student student;
-
-    @Id
-    @Column(name = "term", nullable = false)
-//    @MapsId("term")
-    private Integer term;
- */
 
     @Max(20)
     @Min(0)
@@ -63,9 +40,12 @@ public class Section {
         this.id = new SectionKey();
     }
 
+
     public Long getId(){
         return id.getId();
     }
+
+    public void setId(Long id){ this.id.setId(id);}
 
     public Short getScore() {
         return score;

@@ -4,6 +4,7 @@ import com.example.coursemanagement.Model.Course;
 import com.example.coursemanagement.Model.DTO.CourseDTO;
 import com.example.coursemanagement.Repository.Course.CourseRepository;
 import com.example.coursemanagement.Repository.Course.CourseService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,42 +19,48 @@ public class CourseServiceImpt implements CourseService {
     private CourseRepository courseRepository;
 
     @Override
-    public CourseDTO AddCourse(Course course) {
-        return OutputFrame(courseRepository.save(course));
+    @Transactional
+    public Course AddCourse(Course course) {
+        return courseRepository.save(course);
     }
 
     @Override
-    public List<CourseDTO> GetAllCourse() {
-        List<CourseDTO> list = new ArrayList<>();
+    @Transactional
+    public List<Course> GetAllCourse() {
+        List<Course> list = new ArrayList<>();
         for(Course crs: courseRepository.findAll()){
-            list.add(OutputFrame(crs));
+            list.add(crs);
         }
         return list;
     }
 
     @Override
-    public CourseDTO GetCourseById(Long id){
-        return OutputFrame(GetCourseObjectById(id));
+    @Transactional
+    public Course GetCourseById(Long id){
+        return GetCourseObjectById(id);
     }
 
     @Override
-    public  Course GetCourseObjectById(Long id){
+    @Transactional
+    public Course GetCourseObjectById(Long id){
         return courseRepository.findById(id).get();
     }
 
     @Override
-    public List<CourseDTO> GetAllCourseByCollegeId(Long id) {
-        List<CourseDTO> list = new ArrayList();
+    @Transactional
+    public List<Course> GetAllCourseByCollegeId(Long id) {
+        List<Course> list = new ArrayList();
         for(Course course: courseRepository.findAll()){
             if(Objects.equals(course.getClg().getClgid(), id)){
-                list.add(OutputFrame(course));
+                list.add(course);
             }
         }
         return list;
     }
 
     @Override
-    public CourseDTO UpdateCourse(Course course) {
+    @Transactional
+    public Course UpdateCourse(Course course) {
         Course crs = courseRepository.findById(course.getCid()).get();
 
         if(course.getCname() != null && !course.getCname().equals("")){
@@ -66,30 +73,21 @@ public class CourseServiceImpt implements CourseService {
             crs.setClg(course.getClg());
         }
 
-        return OutputFrame(courseRepository.save(crs));
+        return courseRepository.save(crs);
     }
 
     @Override
+    @Transactional
     public void DeleteCourse(Long id) {
         courseRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public Boolean ExistCourse(Long id){
         for(Course crs: courseRepository.findAll()){
             if(crs.getClg().getClgid() == id) return true;
         }
          return false;
-    }
-
-    @Override
-    public CourseDTO OutputFrame(Course course){
-        return new CourseDTO(
-                                    course.getCid(),
-                                    course.getCname(),
-                                    course.getUnit(),
-                                    course.getClg().getClgid(),
-                                    course.getProf().getpid()
-                                    );
     }
 }

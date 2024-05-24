@@ -4,6 +4,7 @@ import com.example.coursemanagement.Model.DTO.StudentDTO;
 import com.example.coursemanagement.Model.Student;
 import com.example.coursemanagement.Repository.Student.StudentRepository;
 import com.example.coursemanagement.Repository.Student.StudentService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,31 +22,36 @@ public class StudentServiceImpt implements StudentService {
 
 
     @Override
-    public StudentDTO AddStudent(Student student) {
-        return OutputFrame(studentRepository.save(student));
+    @Transactional
+    public Student AddStudent(Student student) {
+        return studentRepository.save(student);
     }
 
     @Override
-    public List<StudentDTO> GetAllStudent() {
-        List<StudentDTO> list = new ArrayList<>();
+    @Transactional
+    public List<Student> GetAllStudent() {
+        List<Student> list = new ArrayList<>();
         for(Student stud: studentRepository.findAll()){
-            list.add(OutputFrame(stud));
+            list.add(stud);
         }
         return list;
     }
 
     @Override
+    @Transactional
     public Student GetStudentObjectById(Long id) {
         return studentRepository.findById(id).get();
     }
 
     @Override
-    public StudentDTO GetStudentById(Long id){
-        return OutputFrame(GetStudentObjectById(id));
+    @Transactional
+    public Student GetStudentById(Long id){
+        return GetStudentObjectById(id);
     }
 
     @Override
-    public StudentDTO UpdateStudent(Student student) {
+    @Transactional
+    public Student UpdateStudent(Student student) {
         Student stud = studentRepository.findById(student.getSid()).get();
 
         if(Objects.nonNull(student.getSname()) && !student.getSname().equals("")){
@@ -61,15 +67,17 @@ public class StudentServiceImpt implements StudentService {
             stud.setNcode(student.getNcode());
         }
 
-        return OutputFrame(studentRepository.save(stud));
+        return studentRepository.save(stud);
     }
 
     @Override
+    @Transactional
     public void DeleteStudentById(Long id) {
         studentRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void DeleteStudentByNationalcode(String ncode){
         for(Student stud: studentRepository.findAll()){
             if(stud.getNcode().equals(ncode)){
@@ -80,22 +88,11 @@ public class StudentServiceImpt implements StudentService {
     }
 
     @Override
+    @Transactional
     public Boolean ExistStudent(String ncode){
         for(Student stud: studentRepository.findAll()){
             if(stud.getNcode().equals(ncode)) return true;
         }
         return false;
-    }
-
-    @Override
-    public StudentDTO OutputFrame(Student student){
-        return new StudentDTO(
-                                    student.getSid(),
-                                    student.getSname(),
-                                    student.getSfamily(),
-                                    student.getNcode(),
-                                    student.getAddress(),
-                                    student.getClg().getClgid()
-                                    );
     }
 }
