@@ -4,6 +4,8 @@ import com.example.coursemanagement.Model.College;
 import java.util.List;
 
 import com.example.coursemanagement.Model.DTO.CollegeDTO;
+import org.json.JSONObject;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
 
@@ -23,5 +25,6 @@ public interface CollegeService {
 
     Boolean ExistCollege(String name);
 
-//    CollegeDTO OutputFrame(College clg);
+//    @Query(value = "select sec.id.student.sid, sec.score from Section sec where sec.id.student.sid =: id", nativeQuery = true)
+//    JSONObject GPACollege(Long id);
 }

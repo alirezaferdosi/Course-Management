@@ -2,9 +2,14 @@ package com.example.coursemanagement.Service;
 
 import com.example.coursemanagement.Model.DTO.StudentDTO;
 import com.example.coursemanagement.Model.Student;
+import com.example.coursemanagement.Model.Section;
+import com.example.coursemanagement.Repository.Section.SectionRepository;
 import com.example.coursemanagement.Repository.Student.StudentRepository;
 import com.example.coursemanagement.Repository.Student.StudentService;
+import com.example.coursemanagement.Repository.Section.SectionService;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,11 +19,15 @@ import java.util.Objects;
 @Service
 public class StudentServiceImpt implements StudentService {
 
-    private final StudentRepository studentRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
-    public StudentServiceImpt(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    @Autowired
+    @Qualifier("sectionServiceImpt")
+    private SectionService sectionService;
+
+    @Autowired
+    private SectionRepository sectionRepository;
 
 
     @Override
@@ -94,5 +103,20 @@ public class StudentServiceImpt implements StudentService {
             if(stud.getNcode().equals(ncode)) return true;
         }
         return false;
+    }
+
+    @Override
+    @Transactional
+    public float GPA(Long id){
+        float score = 0;
+        int unit = 0;
+        for(Section sec:  sectionRepository.findAll()){
+            if(sec.getStudent().getSid() == id && sec.getScore() != null){
+                score += sec.getScore() * sec.getCourse().getUnit();
+                unit += sec.getCourse().getUnit();
+            }
+            System.out.println(score + "---" + unit);
+        }
+        return score / unit;
     }
 }

@@ -12,11 +12,11 @@ public interface SectionService {
 
     List<Section> GetAllSection();
 
-    List<Section> GetAllSectionByCollegeId(String id);
+    List<Section> GetAllSectionByCollegeId(Long id);
 
-    List<Section> GetAllSectionByProfessorId(String id);
+    List<Section> GetAllSectionByProfessorId(Long id);
 
-    List<Section> GetAllSectionByStudentId(String id);
+    List<Section> GetAllSectionByStudentId(Long id);
 
     List<Section> GetAllSectionByTerm(Integer term);
 

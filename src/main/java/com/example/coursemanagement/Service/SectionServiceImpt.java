@@ -2,6 +2,7 @@ package com.example.coursemanagement.Service;
 
 import com.example.coursemanagement.Model.DTO.SectionDTO;
 import com.example.coursemanagement.Model.Section;
+import com.example.coursemanagement.Model.SectionKey;
 import com.example.coursemanagement.Repository.Course.CourseRepository;
 import com.example.coursemanagement.Repository.Section.SectionRepository;
 import com.example.coursemanagement.Repository.Section.SectionService;
@@ -45,10 +46,10 @@ public class SectionServiceImpt implements SectionService {
 
     @Override
     @Transactional
-    public List<Section> GetAllSectionByCollegeId(String id) {
+    public List<Section> GetAllSectionByCollegeId(Long id) {
         List<Section> list = new ArrayList();
         for (Section sec : sectionRepository.findAll()) {
-            if (sec.getCourse().getClg().getClgid().equals(id)) {
+            if (sec.getCourse().getClg().getClgid() == id) {
                 list.add(sec);
             }
         }
@@ -57,11 +58,11 @@ public class SectionServiceImpt implements SectionService {
 
     @Override
     @Transactional
-    public List<Section> GetAllSectionByProfessorId(String id) {
+    public List<Section> GetAllSectionByProfessorId(Long id) {
 
         List<Section> list = new ArrayList();
         for (Section sec : sectionRepository.findAll()) {
-            if (sec.getCourse().getProf().getPid().equals(id)) {
+            if (sec.getCourse().getProf().getPid() == id) {
                 list.add(sec);
             }
         }
@@ -70,11 +71,12 @@ public class SectionServiceImpt implements SectionService {
 
     @Override
     @Transactional
-    public List<Section> GetAllSectionByStudentId(String id) {
+    public List<Section> GetAllSectionByStudentId(Long id) {
         List<Section> list = new ArrayList();
         for (Section sec : sectionRepository.findAll()) {
-            if (sec.getStudent().getSid().equals(id)) {
+            if (sec.getStudent().getSid() == id) {
                 list.add(sec);
+                System.out.println(sec.getStudent().getSname());
             }
         }
         return list;
@@ -95,27 +97,25 @@ public class SectionServiceImpt implements SectionService {
     @Override
     @Transactional
     public Section UpdateSection(Section section) {
-        Section sec = null;
-        for (Section s : sectionRepository.findAll()) {
-            if (s.getId() == section.getId()) sec = s;
-        }
+        for (Section sec : sectionRepository.findAll()) {
+            if (sec.getId() == section.getId()){
+                if (section.getCourse() != null && !section.getCourse().getCid().equals("")) {
+                    sec.setCourse(section.getCourse());
+                }
+                if (section.getStudent() != null && !section.getStudent().getSid().equals("")) {
+                    sec.setStudent(section.getStudent());
+                }
+                if (section.getTerm() != null && !section.getTerm().equals("")) {
+                    sec.setTerm(section.getTerm());
+                }
+                if (section.getScore() != null) {
+                    sec.setScore(section.getScore());
+                }
 
-        if (sec == null) return null;
-
-        if (section.getCourse() != null && !section.getCourse().getCid().equals("")) {
-            sec.setCourse(section.getCourse());
+                return sectionRepository.save(sec);
+            }
         }
-        if (section.getStudent() != null && !section.getStudent().getSid().equals("")) {
-            sec.setStudent(section.getStudent());
-        }
-        if (section.getTerm() != null && !section.getTerm().equals("")) {
-            sec.setTerm(section.getTerm());
-        }
-        if (section.getScore() != null) {
-            sec.setScore(section.getScore());
-        }
-
-        return sectionRepository.save(sec);
+        return null;
     }
 
     @Override

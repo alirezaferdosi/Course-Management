@@ -1,6 +1,5 @@
 package com.example.coursemanagement.Repository.Student;
 
-import com.example.coursemanagement.Model.DTO.StudentDTO;
 import com.example.coursemanagement.Model.Student;
 import org.springframework.stereotype.Component;
 
@@ -23,4 +22,6 @@ public interface StudentService {
     void DeleteStudentByNationalcode(String ncode);
 
     Boolean ExistStudent(String ncode);
+
+    float GPA(Long id);
 }

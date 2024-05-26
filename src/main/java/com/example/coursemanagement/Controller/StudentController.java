@@ -59,6 +59,10 @@ public class StudentController {
         studentService.DeleteStudentByNationalcode(ncode);
     }
 
+    @GetMapping("/Score")
+    public float AverageScore(@RequestBody Long id){
+        return studentService.GPA(id);
+    }
 
 
 }

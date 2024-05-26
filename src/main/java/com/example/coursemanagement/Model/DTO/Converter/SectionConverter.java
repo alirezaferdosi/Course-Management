@@ -32,6 +32,7 @@ public class SectionConverter implements ConvertObject<Section, SectionDTO> {
     @Override
     public Section ConvertDtoToEntity(SectionDTO sectionDTO) {
         return new Section(
+                            sectionDTO.getId(),
                             courseService.GetCourseObjectById(sectionDTO.getCourse()),
                             studentService.GetStudentObjectById(sectionDTO.getStudent()),
                             sectionDTO.getTerm(),

@@ -41,7 +41,7 @@ public class SectionController {
     }
 
     @GetMapping("ByCollegeId")
-    public List<SectionDTO> GetAllSectionByCollegeId(@RequestBody String id){
+    public List<SectionDTO> GetAllSectionByCollegeId(@RequestBody Long id){
         return sectionService.GetAllSectionByCollegeId(id)
                 .stream()
                 .map(item -> convertObject.ConvertEntityToDto(item))
@@ -49,7 +49,7 @@ public class SectionController {
     }
 
     @GetMapping("ByProfessorId")
-    public List<SectionDTO> GetAllSectionByProfessorId(@RequestBody String id){
+    public List<SectionDTO> GetAllSectionByProfessorId(@RequestBody Long id){
         return sectionService.GetAllSectionByProfessorId(id)
                 .stream()
                 .map(item -> convertObject.ConvertEntityToDto(item))
@@ -57,7 +57,7 @@ public class SectionController {
     }
 
     @GetMapping("ByStudentId")
-    public List<SectionDTO> GetAllSectionByStudentId(@RequestBody String id){
+    public List<SectionDTO> GetAllSectionByStudentId(@RequestBody Long id){
         return sectionService.GetAllSectionByStudentId(id)
                 .stream()
                 .map(item -> convertObject.ConvertEntityToDto(item))
@@ -65,8 +65,8 @@ public class SectionController {
     }
 
     @GetMapping("ByTerm")
-    public List<SectionDTO> GetAllSectionByTerm(@RequestBody String term){
-        return sectionService.GetAllSectionByTerm(Integer.valueOf(term))
+    public List<SectionDTO> GetAllSectionByTerm(@RequestBody Integer term){
+        return sectionService.GetAllSectionByTerm(term)
                 .stream()
                 .map(item -> convertObject.ConvertEntityToDto(item))
                 .toList();
